@@ -3,1300 +3,1065 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Shoreline — England's Coastal Travel Guide</title>
-<meta name="description" content="The Shoreline is your honest local guide to the Kent coast — best beaches, fish and chip shops, coastal walks, and hidden gems from Whitstable to Dover.">
-<meta property="og:title" content="The Shoreline — England's Coastal Travel Guide">
-<meta property="og:description" content="Honest local guides to the best beaches, chippies, and coastal walks on the Kent coast.">
-<meta property="og:type" content="website">
+<title>SmartBudget Travel — Find Where Your Money Takes You</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
+/* ── BASE ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --sand:#F5EDD6;--deep:#1A3A4A;--ocean:#2C7DA0;--foam:#EAF4F9;
-  --kelp:#4A7C59;--rust:#C0614B;--mist:#8BA8B5;--text:#1A2E38;--light:#5A7080;
-  --r:8px;--tr:0.22s ease;
-}
 html{scroll-behavior:smooth}
-body{font-family:'Lato',sans-serif;background:var(--sand);color:var(--text);overflow-x:hidden}
-.page{display:none;animation:fadeIn .28s ease}
-.page.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+body{font-family:'DM Sans',sans-serif;background:#0a0d0f;color:#e8e4dc;min-height:100vh;overflow-x:hidden}
+:root{
+  --bg:#0a0d0f;--bg2:#111418;--bg3:#181d22;--bg4:#1f252c;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --text:#e8e4dc;--text2:#8a8880;--text3:#5a5856;
+  --accent:#c8f53c;--accent2:#a8d420;--accent-dim:rgba(200,245,60,0.12);
+  --blue:#4a9eff;--blue-dim:rgba(74,158,255,0.12);
+  --orange:#ff8c42;--orange-dim:rgba(255,140,66,0.12);
+  --green:#4ddb8a;--green-dim:rgba(77,219,138,0.1);
+  --red:#ff5a5a;--radius:12px;--radius-lg:20px;
+}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.4}
+.syne{font-family:'Syne',sans-serif}
 
-/* NAV */
-nav{background:var(--deep);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:62px;position:sticky;top:0;z-index:400;gap:1rem}
-.logo{font-family:'Playfair Display',serif;font-style:italic;color:var(--sand);font-size:1.35rem;cursor:pointer;flex-shrink:0;user-select:none}
-.logo span{color:#7FC8E0}
-.nav-links{display:flex;gap:1.6rem;list-style:none}
-.nav-links li a{color:var(--mist);text-decoration:none;font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;transition:color var(--tr);cursor:pointer;padding-bottom:3px;border-bottom:2px solid transparent}
-.nav-links li a:hover{color:var(--sand)}
-.nav-links li a.active{color:#fff;border-bottom-color:var(--ocean)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
-.hamburger span{display:block;width:22px;height:2px;background:var(--mist);transition:var(--tr)}
-.hamburger:hover span{background:#fff}
-.mobile-nav{display:none;position:fixed;inset:62px 0 0 0;background:var(--deep);z-index:390;padding:2rem;flex-direction:column}
-.mobile-nav.open{display:flex}
-.mobile-nav a{color:var(--sand);font-size:1.1rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.08);cursor:pointer;text-decoration:none}
-.back-btn{display:none;align-items:center;gap:9px;cursor:pointer;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.28);border-radius:var(--r);padding:8px 18px;transition:background var(--tr),border-color var(--tr);color:#fff;font-size:0.95rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap}
-.back-btn:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.55)}
-.back-btn.vis{display:flex}
-.back-btn svg{width:18px;height:18px;flex-shrink:0}
-#pgbar{position:fixed;top:62px;left:0;height:3px;background:var(--ocean);width:0%;z-index:500;transition:width .1s linear;display:none}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:64px;background:rgba(10,13,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+.nav-logo-mark{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-logo-text{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;letter-spacing:-.02em}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:14px;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.btn-nav{padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;border-radius:8px;cursor:pointer;transition:all .2s;border:1px solid var(--border2);background:transparent;color:var(--text);text-decoration:none}
+.btn-nav:hover{background:var(--bg3)}
+.btn-nav-primary{background:var(--accent);color:#0a0d0f;border-color:var(--accent);font-weight:600}
+.btn-nav-primary:hover{background:var(--accent2)}
 
-/* AD */
-.ad-top{background:#fff;border-bottom:1px dashed #ddd;text-align:center;padding:.45rem;font-size:.67rem;color:#bbb;letter-spacing:.06em}
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:64px 0 0;position:relative;overflow:hidden}
+.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 30%,black 30%,transparent 80%)}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(200,245,60,.08) 0%,transparent 70%);top:10%;left:50%;transform:translateX(-50%);pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;padding:0 2.5rem;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--accent-dim);border:1px solid rgba(200,245,60,.25);border-radius:100px;font-size:12px;font-weight:500;color:var(--accent);margin-bottom:24px;letter-spacing:.05em;text-transform:uppercase}
+.hero-badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero-h1{font-family:'Syne',sans-serif;font-size:clamp(42px,5vw,64px);font-weight:800;line-height:1.0;letter-spacing:-.03em;margin-bottom:24px;color:var(--text)}
+.hero-h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:17px;line-height:1.65;color:var(--text2);margin-bottom:40px;font-weight:300}
+.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn-hero{padding:14px 28px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;border-radius:10px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:none}
+.btn-hero-primary{background:var(--accent);color:#0a0d0f}
+.btn-hero-primary:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-hero-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2)}
+.btn-hero-ghost:hover{color:var(--text);background:var(--bg3)}
+.hero-stats{display:flex;gap:32px;margin-top:48px;padding-top:32px;border-top:1px solid var(--border)}
+.hero-stat-val{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--text)}
+.hero-stat-label{font-size:13px;color:var(--text3);margin-top:2px}
 
-/* HERO */
-.hero{background:linear-gradient(155deg,var(--deep) 0%,#1e4d63 45%,var(--ocean) 100%);padding:4.5rem 1.5rem 5rem;text-align:center;position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:60px;background:var(--sand);clip-path:ellipse(55% 100% at 50% 100%)}
-.hero-eye{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#7FC8E0;margin-bottom:.9rem}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.6rem);color:#fff;line-height:1.15;margin-bottom:1rem;max-width:700px;margin-left:auto;margin-right:auto}
-.hero h1 em{color:#7FC8E0;font-style:italic}
-.hero-sub{color:#a8c8d8;font-size:.98rem;max-width:500px;margin:0 auto 2rem;line-height:1.75;font-weight:300}
+/* ── HERO WIDGET ── */
+.hero-widget{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;position:relative}
+.hero-widget::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.widget-tabs{display:flex;border-bottom:1px solid var(--border)}
+.widget-tab{flex:1;padding:14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text3);background:transparent;border:none;cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;margin-bottom:-1px}
+.widget-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.widget-body{padding:20px}
+.wf-label{display:block;font-size:11px;font-weight:500;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.wf-input{width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s;appearance:none;margin-bottom:12px}
+.wf-input:focus{border-color:rgba(200,245,60,.4)}
+.wf-input[type=select],.wf-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%235a5856' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.wf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.style-pills{display:flex;gap:6px;margin-bottom:14px}
+.style-pill{flex:1;padding:8px 0;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all .2s;text-align:center}
+.style-pill.active{background:var(--accent-dim);border-color:rgba(200,245,60,.3);color:var(--accent)}
+.btn-search{width:100%;padding:13px;background:var(--accent);color:#0a0d0f;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-search:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-search:disabled{opacity:.5;cursor:not-allowed;transform:none}
 
-/* SEARCH */
-.sw{max-width:680px;margin:0 auto 2.5rem;position:relative;z-index:10}
-.sbar{background:#fff;border-radius:var(--r);box-shadow:0 6px 28px rgba(0,0,0,.2);display:flex;overflow:hidden}
-.sbar select{border:none;padding:.85rem .9rem;font-family:'Lato',sans-serif;font-size:.85rem;color:var(--light);font-weight:700;background:transparent;outline:none;border-right:1px solid #e8e0d0;cursor:pointer;flex-shrink:0}
-.sbar input{flex:1;border:none;padding:.85rem 1rem;font-family:'Lato',sans-serif;font-size:.9rem;color:var(--text);background:transparent;outline:none;min-width:0}
-.sbar input::placeholder{color:#aaa}
-.sbar button{background:var(--rust);color:#fff;border:none;padding:.85rem 1.3rem;font-family:'Lato',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background var(--tr);white-space:nowrap;flex-shrink:0}
-.sbar button:hover{background:#a8503c}
-.sdrop{background:#fff;border-radius:0 0 10px 10px;box-shadow:0 14px 40px rgba(0,0,0,.16);display:none;position:absolute;left:0;right:0;top:calc(100% - 1px);z-index:300;border-top:1px solid #f0eae0}
-.sdrop.open{display:block}
-.dhdr{background:var(--deep);color:#7FC8E0;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.2rem}
-.ditem{display:flex;align-items:center;gap:12px;padding:.75rem 1.2rem;border-bottom:1px solid #f5f0e8;cursor:pointer;transition:background var(--tr)}
-.ditem:last-child{border-bottom:none}
-.ditem:hover{background:var(--foam)}
-.dimg{width:50px;height:38px;border-radius:4px;object-fit:cover;flex-shrink:0;background:#eee}
-.dname{font-weight:700;font-size:.9rem;color:var(--deep)}
-.dsub{font-size:.74rem;color:var(--light);margin-top:1px}
-.darr{margin-left:auto;color:var(--ocean);font-size:1rem;flex-shrink:0}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;padding-bottom:2.5rem}
-.bp{background:var(--ocean);color:#fff;border:none;padding:.72rem 1.7rem;border-radius:4px;font-family:'Lato',sans-serif;font-weight:700;font-size:.86rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background var(--tr),transform .15s}
-.bp:hover{background:#2468a0;transform:translateY(-2px)}
-.bo{background:transparent;color:var(--sand);border:1px solid rgba(255,255,255,.32);padding:.72rem 1.7rem;border-radius:4px;font-family:'Lato',sans-serif;font-weight:700;font-size:.86rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
-.bo:hover{border-color:var(--sand);background:rgba(255,255,255,.08)}
+/* ── FEATURES ── */
+.section{max-width:1100px;margin:0 auto;padding:120px 2.5rem}
+.section-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.section-h2{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:20px}
+.section-sub{font-size:17px;color:var(--text2);line-height:1.6;max-width:540px;font-weight:300}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:64px}
+.feature-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;transition:border-color .3s,transform .3s}
+.feature-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.feature-card.featured{background:linear-gradient(135deg,rgba(200,245,60,.06),var(--bg2));border-color:rgba(200,245,60,.2);grid-column:span 2}
+.feature-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:20px}
+.fi-acc{background:var(--accent-dim)}.fi-blue{background:var(--blue-dim)}.fi-ora{background:var(--orange-dim)}.fi-grn{background:var(--green-dim)}
+.feature-h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px}
+.feature-p{font-size:14px;color:var(--text2);line-height:1.65;font-weight:300}
+.feature-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.feature-tag{padding:4px 10px;font-size:11px;font-weight:500;border-radius:100px;background:var(--bg3);border:1px solid var(--border);color:var(--text3)}
 
-/* REGIONS */
-.regions{background:var(--deep);padding:1.8rem 0}
-.rin{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
-.rin::-webkit-scrollbar{display:none}
-.rp{flex-shrink:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:var(--sand);padding:.5rem 1.2rem;border-radius:30px;font-size:.8rem;font-weight:700;cursor:pointer;transition:background var(--tr),border-color var(--tr);white-space:nowrap}
-.rp:hover,.rp.active{background:var(--ocean);border-color:var(--ocean)}
+/* ── HOW IT WORKS ── */
+.how-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:120px 0}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:64px;position:relative}
+.steps-grid::before{content:'';position:absolute;top:22px;left:calc(12.5% + 22px);right:calc(12.5% + 22px);height:1px;background:linear-gradient(90deg,var(--border),var(--accent),var(--border))}
+.step{text-align:center;position:relative}
+.step-num{width:44px;height:44px;border-radius:50%;background:var(--bg2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--accent);margin:0 auto 20px;position:relative;z-index:1}
+.step h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px}
+.step p{font-size:13px;color:var(--text2);line-height:1.6;font-weight:300}
 
-/* LAYOUT */
-.container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
-section{padding:2.5rem 0}
-.sh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.5rem}
-.sh h2{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--deep)}
-.sh a{font-size:.76rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ocean);text-decoration:none;cursor:pointer}
-.sh a:hover{text-decoration:underline}
+/* ── DESTINATIONS STRIP ── */
+.dest-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:100px 0;overflow:hidden}
+.dest-scroll{display:flex;gap:16px;padding:0 2.5rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.dest-scroll::-webkit-scrollbar{display:none}
+.dest-card{flex-shrink:0;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;width:220px;cursor:pointer;transition:all .2s}
+.dest-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.dest-flag{font-size:32px;margin-bottom:12px}
+.dest-city{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px}
+.dest-country{font-size:12px;color:var(--text3);margin-bottom:16px}
+.dest-price{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--accent)}
+.dest-price-label{font-size:11px;color:var(--text3)}
+.dest-tags{display:flex;gap:5px;margin-top:12px;flex-wrap:wrap}
+.dest-tag{padding:3px 8px;font-size:10px;font-weight:500;border-radius:100px;background:var(--bg4);border:1px solid var(--border);color:var(--text3)}
 
-/* CARDS */
-.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.3rem}
-.card{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.07);transition:transform var(--tr),box-shadow var(--tr);cursor:pointer}
-.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.14)}
-.cimg{height:195px;position:relative;overflow:hidden}
-.cimg img{width:100%;height:100%;object-fit:cover;transition:transform .45s;display:block}
-.card:hover .cimg img{transform:scale(1.05)}
-.ctag{position:absolute;top:11px;left:11px;color:#fff;font-size:.67rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:3px}
-.tb{background:var(--ocean)}.tr{background:var(--rust)}.tg{background:var(--kelp)}
-.cbody{padding:1rem 1.2rem 1.2rem}
-.cbody h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.45rem;color:var(--deep);line-height:1.3}
-.cbody p{font-size:.83rem;color:var(--light);line-height:1.6;margin-bottom:.75rem}
-.cmeta{display:flex;gap:.9rem;font-size:.73rem;color:var(--mist);flex-wrap:wrap}
+/* ── APP SHELL ── */
+.app-section{padding:120px 0;background:var(--bg)}
+.app-inner{max-width:1100px;margin:0 auto;padding:0 2.5rem}
+.app-hdr{text-align:center;margin-bottom:60px}
+.app-shell{background:var(--bg2);border:1px solid var(--border2);border-radius:24px;overflow:hidden;position:relative}
+.app-shell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 10%,var(--accent) 50%,transparent 90%)}
+.app-top-bar{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border);background:var(--bg3)}
+.app-dot{width:10px;height:10px;border-radius:50%}
+.dot-r{background:#ff5f56}.dot-y{background:#febc2e}.dot-g{background:#27c93f}
+.app-url{flex:1;background:var(--bg4);border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:12px;color:var(--text3);display:flex;align-items:center;gap:8px}
+.app-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg3);overflow-x:auto;scrollbar-width:none}
+.app-tabs::-webkit-scrollbar{display:none}
+.app-tab{padding:14px 20px;font-size:13px;font-weight:500;color:var(--text3);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'DM Sans',sans-serif;margin-bottom:-1px}
+.app-tab:hover{color:var(--text2)}
+.app-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.app-body{padding:28px}
 
-/* TWO-COL */
-.twocol{display:grid;grid-template-columns:1fr 285px;gap:2rem;align-items:start}
-.alist{display:flex;flex-direction:column;gap:1rem}
-.ai{background:#fff;border-radius:var(--r);padding:1rem;display:flex;gap:1rem;cursor:pointer;transition:box-shadow var(--tr)}
-.ai:hover{box-shadow:0 4px 20px rgba(0,0,0,.1)}
-.at{width:85px;height:68px;border-radius:6px;object-fit:cover;flex-shrink:0}
-.ain h4{font-family:'Playfair Display',serif;font-size:.96rem;color:var(--deep);margin-bottom:.3rem;line-height:1.3}
-.ain p{font-size:.78rem;color:var(--light);line-height:1.5}
-.acat{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--kelp);margin-bottom:.28rem}
+/* ── FORM ELEMENTS ── */
+.f-label{display:block;font-size:11px;font-weight:500;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.f-ctrl{width:100%;padding:9px 12px;background:var(--bg4);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color .2s;appearance:none}
+.f-ctrl:focus{border-color:rgba(200,245,60,.4)}
+select.f-ctrl{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 3.5L5 7l3.5-3.5' fill='none' stroke='%235a5856' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;cursor:pointer}
+.f-group{margin-bottom:12px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sty-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:16px}
+.sty-btn{padding:7px;font-size:11px;font-weight:600;font-family:'DM Sans',sans-serif;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all .2s;text-align:center;letter-spacing:.03em;text-transform:uppercase}
+.sty-btn:hover{color:var(--text2)}
+.sty-btn.active{background:var(--accent-dim);border-color:rgba(200,245,60,.35);color:var(--accent)}
+.btn-full{width:100%;padding:12px;background:var(--accent);color:#0a0d0f;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;border:none;border-radius:9px;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.btn-full:hover{background:var(--accent2)}
+.btn-full:disabled{opacity:.5;cursor:not-allowed}
+.form-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.sec-title{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
 
-/* SIDEBAR */
-.sbar-side{position:sticky;top:76px}
-.sad{background:#fff;border:1px dashed #ccd;border-radius:var(--r);padding:1.1rem;text-align:center;margin-bottom:1.2rem}
-.aslot{width:100%;height:145px;background:#f5f5f5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#bbb;margin:.5rem 0;flex-direction:column;gap:3px}
-.albl{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#bbb}
-.swidget{background:#fff;border-radius:var(--r);padding:1.1rem;margin-bottom:1rem}
-.swidget h4{font-family:'Playfair Display',serif;font-size:.96rem;margin-bottom:.7rem;color:var(--deep);border-bottom:1px solid #eee;padding-bottom:.4rem}
-.swidget p{font-size:.8rem;color:var(--light);line-height:1.6;margin-bottom:.75rem}
-.pillcloud{display:flex;flex-wrap:wrap;gap:.4rem}
-.pill{background:var(--foam);color:var(--ocean);font-size:.71rem;font-weight:700;padding:3px 9px;border-radius:20px;cursor:pointer;transition:background var(--tr),color var(--tr);border:none;font-family:inherit}
-.pill:hover{background:var(--ocean);color:#fff}
+/* ── RESULTS ── */
+.search-layout{display:grid;grid-template-columns:1fr 2fr;gap:24px}
+.results-area{display:flex;flex-direction:column;gap:12px}
+.trip-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.trip-card:hover{border-color:var(--border2);transform:translateY(-1px)}
+.trip-card.selected{border-color:rgba(200,245,60,.4);background:linear-gradient(135deg,rgba(200,245,60,.04),var(--bg3))}
+.trip-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;transition:background .2s}
+.trip-card.selected::before{background:var(--accent)}
+.tc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.tc-route{display:flex;align-items:center;gap:10px}
+.tc-flag{font-size:20px;line-height:1}
+.tc-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700}
+.tc-sub{font-size:12px;color:var(--text3);margin-top:2px}
+.tc-price-area{text-align:right}
+.tc-total{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--accent)}
+.tc-total-lbl{font-size:11px;color:var(--text3)}
+.tc-breakdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding-top:12px;border-top:1px solid var(--border)}
+.tc-item{text-align:center}
+.tc-item-val{font-size:13px;font-weight:600;color:var(--text)}
+.tc-item-key{font-size:11px;color:var(--text3);margin-top:2px}
 
-/* TIDE */
-.tidecard{background:linear-gradient(135deg,var(--deep),#1e4d63);border-radius:var(--r);padding:1.1rem;color:#fff;margin-bottom:1rem}
-.tidecard h4{font-family:'Playfair Display',serif;font-size:.96rem;color:#fff;margin-bottom:.7rem;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:.4rem}
-.tide-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.8rem}
-.tide-row:last-child{border:none}
-.tide-time{color:#7FC8E0;font-weight:700}
-.tide-ht{color:rgba(255,255,255,.55);font-size:.73rem}
-.tide-loc{font-size:.68rem;color:rgba(255,255,255,.45);margin-top:.5rem;text-align:center}
+/* ── DETAIL ── */
+.detail-hero{background:linear-gradient(135deg,rgba(200,245,60,.06),var(--bg3));border:1px solid rgba(200,245,60,.15);border-radius:var(--radius-lg);padding:28px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+.detail-hero h2{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;display:flex;align-items:center;gap:12px}
+.detail-hero p{font-size:13px;color:var(--text2);margin-top:4px}
+.detail-total{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--accent)}
+.detail-total-lbl{font-size:12px;color:var(--text3)}
+.sub-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.sub-tab{padding:7px 16px;font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all .2s}
+.sub-tab:hover{color:var(--text2)}
+.sub-tab.active{background:var(--accent-dim);border-color:rgba(200,245,60,.3);color:var(--accent)}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.d-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.d-card-title{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.info-row:last-child{border-bottom:none}
+.ik{color:var(--text3)}.iv{font-weight:500;color:var(--text)}
+.badge{padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600}
+.badge-g{background:rgba(77,219,138,.12);color:#4ddb8a}
+.badge-a{background:rgba(255,140,66,.12);color:#ff8c42}
+.badge-b{background:rgba(74,158,255,.12);color:#4a9eff}
+.badge-r{background:rgba(255,90,90,.12);color:#ff5a5a}
+.bbar-row{margin-bottom:10px}
+.bbar-labels{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.bbar-labels span:first-child{color:var(--text2)}
+.bbar-labels span:last-child{font-weight:600;color:var(--text)}
+.bbar-track{height:6px;background:var(--bg4);border-radius:3px;overflow:hidden}
+.bbar-fill{height:100%;border-radius:3px;transition:width .5s ease}
+.fl-list,.ht-list{display:flex;flex-direction:column;gap:8px}
+.fl-item,.ht-item{background:var(--bg4);border:1px solid var(--border);border-radius:9px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between}
+.fl-item:hover,.ht-item:hover{border-color:var(--border2);cursor:pointer}
+.fl-airline{font-size:13px;font-weight:600;color:var(--text)}
+.fl-times{font-size:12px;color:var(--text3);margin-top:3px}
+.fl-price{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--accent)}
+.ht-name{font-size:13px;font-weight:600;color:var(--text)}
+.ht-area{font-size:12px;color:var(--text3);margin-top:3px}
+.ht-stars{color:#febc2e;font-size:11px}
+.ht-price{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--accent)}
+.ht-per{font-size:11px;color:var(--text3)}
+.vax-list{display:flex;flex-direction:column;gap:8px}
+.vax-row{display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.local-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.li-k{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;font-weight:500;margin-bottom:3px}
+.li-v{font-size:13px;font-weight:500;color:var(--text)}
 
-/* NEWSLETTER + FOOTER */
-.nl{background:var(--ocean);padding:3rem 1.5rem;text-align:center;color:#fff}
-.nl h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:.4rem}
-.nl p{font-size:.86rem;color:rgba(255,255,255,.75);margin-bottom:1.3rem}
-.nlform{display:flex;gap:.5rem;max-width:400px;margin:0 auto}
-.nlform input{flex:1;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;padding:.7rem 1rem;border-radius:4px;font-family:'Lato',sans-serif;font-size:.88rem;outline:none;min-width:0}
-.nlform input::placeholder{color:rgba(255,255,255,.5)}
-.nlform button{background:var(--deep);color:var(--sand);border:none;padding:.7rem 1.25rem;border-radius:4px;font-family:'Lato',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer}
-.nlform button:hover{background:#0f2530}
-.nlsuccess{color:#7FC8E0;font-weight:700;font-size:.9rem;margin-top:.6rem;display:none}
-footer{background:var(--deep);color:var(--mist);padding:2rem;text-align:center;font-size:.78rem;line-height:2.1}
-footer strong{color:var(--sand)}
-footer a{color:var(--mist);text-decoration:none;cursor:pointer}
-footer a:hover{color:var(--sand)}
+/* ── BUDGET FINDER ── */
+.budget-panel{max-width:800px;margin:0 auto}
+.budget-hero{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;text-align:center}
+.budget-big{display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:8px}
+.budget-big-sym{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--accent)}
+.budget-big-inp{font-family:'Syne',sans-serif;font-size:52px;font-weight:800;color:var(--accent);background:transparent;border:none;outline:none;width:220px;text-align:center}
+.brc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;cursor:pointer;transition:all .2s;margin-bottom:10px;position:relative;overflow:hidden}
+.brc:hover{border-color:var(--border2);transform:translateY(-1px)}
+.brc.best{border-color:rgba(200,245,60,.25)}
+.best-badge{position:absolute;top:12px;right:12px;background:var(--accent-dim);border:1px solid rgba(200,245,60,.3);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:100px}
+.brc-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.brc-flag{font-size:28px;line-height:1}
+.brc-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:700}
+.brc-desc{font-size:12px;color:var(--text3);margin-top:2px}
+.brc-total{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--accent);margin-left:auto}
+.brc-meta{font-size:11px;color:var(--text3);text-align:right}
+.bprog{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.bprog-bar{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.bprog-fill{height:100%;border-radius:2px}
+.bprog-lbls{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:5px}
 
-/* ARTICLE HERO */
-.ahero{position:relative;height:430px;overflow:hidden}
-.ahero img{width:100%;height:100%;object-fit:cover;display:block}
-.aoverlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,35,48,.92) 0%,rgba(15,35,48,.3) 55%,transparent 100%)}
-.ahcontent{position:absolute;bottom:0;left:0;right:0;padding:2.2rem 2.5rem;max-width:860px}
-.abread{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7FC8E0;margin-bottom:.75rem;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
-.abread:hover{text-decoration:underline}
-.ahcontent h1{font-family:'Playfair Display',serif;font-size:clamp(1.65rem,3.5vw,2.55rem);color:#fff;line-height:1.2;margin-bottom:.85rem}
-.ahmeta{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.76rem;color:rgba(255,255,255,.65)}
+/* ── VISA ── */
+.visa-panel{max-width:680px;margin:0 auto}
+.visa-result{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.visa-result-hdr{background:linear-gradient(135deg,rgba(74,158,255,.08),var(--bg3));padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px}
+.visa-flag{font-size:36px}
+.visa-body{padding:20px}
+.visa-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vii{background:var(--bg4);border-radius:9px;padding:14px}
+.vii-k{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;font-weight:500;margin-bottom:5px}
+.vii-v{font-size:14px;font-weight:600;color:var(--text)}
 
-/* ARTICLE BODY */
-.acontent{max-width:740px;margin:0 auto;padding:2.2rem 1.5rem 3rem}
-.acontent h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--deep);margin:2rem 0 .7rem;padding-top:.3rem}
-.acontent h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--deep);margin:1.6rem 0 .45rem}
-.acontent p{font-size:.98rem;line-height:1.85;color:var(--text);margin-bottom:1.1rem}
-.acontent ul{margin:.4rem 0 1.1rem 1.4rem}
-.acontent ul li{font-size:.93rem;line-height:1.75;margin-bottom:.3rem}
-.afull{width:100%;aspect-ratio:16/7;object-fit:cover;border-radius:10px;margin:1.6rem 0;display:block}
-.apair{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:1.6rem 0}
-.apair img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);display:block}
-.imgcap{font-size:.76rem;color:var(--light);text-align:center;margin:-.9rem 0 1.4rem;font-style:italic;line-height:1.4}
-.ibox{background:var(--foam);border-left:4px solid var(--ocean);border-radius:0 var(--r) var(--r) 0;padding:1.05rem 1.35rem;margin:1.3rem 0}
-.ibox strong{display:block;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ocean);margin-bottom:.38rem}
-.ibox p{margin:0;font-size:.88rem;line-height:1.65}
+/* ── LOADING / ERROR / EMPTY ── */
+.loading{display:none;flex-direction:column;align-items:center;justify-content:center;padding:60px 0;gap:16px}
+.spinner{width:32px;height:32px;border:2.5px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-msg{font-size:14px;color:var(--text2);font-weight:300}
+.empty{text-align:center;padding:40px;color:var(--text3);font-size:14px}
+.empty .e-icon{font-size:36px;margin-bottom:12px}
+.error-banner{background:rgba(255,90,90,.1);border:1px solid rgba(255,90,90,.25);border-radius:9px;padding:12px 16px;font-size:13px;color:#ff8a8a;margin-bottom:16px;display:none}
+.api-status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text3);margin-bottom:16px}
+.api-dot{width:6px;height:6px;border-radius:50%;background:var(--text3)}
+.api-dot.live{background:var(--green)}
+.api-dot.loading{background:var(--orange);animation:pulse 1s ease-in-out infinite}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text3);cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;margin-bottom:20px;padding:0;transition:color .2s}
+.back-link:hover{color:var(--text2)}
 
-/* VENUE CARD */
-.vc{background:#fff;border-radius:var(--r);margin:1rem 0;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:3px solid var(--rust);overflow:hidden}
-.vc.walk{border-left-color:var(--kelp)}
-.vc.beach{border-left-color:var(--ocean)}
-.vc-img{width:100%;height:180px;object-fit:cover;display:block}
-.vc-body{padding:1.15rem 1.35rem}
-.vcmeta{font-size:.7rem;color:var(--mist);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem}
-.vc-body h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--deep);margin-bottom:.3rem}
-.vc-body p{font-size:.86rem;line-height:1.62;color:var(--light);margin:0}
-.vc-addr{display:flex;align-items:flex-start;gap:.5rem;margin-top:.7rem;padding-top:.7rem;border-top:1px solid #f0eae0}
-.vc-addr svg{width:14px;height:14px;flex-shrink:0;color:var(--ocean);margin-top:2px}
-.vc-addr p{font-size:.8rem;color:var(--light);margin:0;line-height:1.5}
-.vc-addr strong{color:var(--text);font-weight:700}
-.aad{background:#fff;border:1px dashed #ccc;border-radius:var(--r);padding:.7rem;text-align:center;font-size:.66rem;color:#bbb;letter-spacing:.05em;margin:1.8rem 0}
-.related{background:var(--foam);padding:2.2rem 0}
-.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem}
+/* ── CTA / FOOTER ── */
+.cta-section{background:linear-gradient(135deg,rgba(200,245,60,.04),var(--bg));border-top:1px solid var(--border);padding:120px 0;text-align:center}
+.cta-badges{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.cta-badge{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text3)}
+.cta-badge-dot{width:5px;height:5px;background:var(--accent);border-radius:50%}
+footer{border-top:1px solid var(--border);padding:60px 0 40px}
+.footer-inner{max-width:1100px;margin:0 auto;padding:0 2.5rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:48px}
+.footer-brand p{font-size:14px;color:var(--text3);line-height:1.65;margin-top:14px;font-weight:300}
+.footer-col h4{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--text2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+.footer-col a{display:block;font-size:14px;color:var(--text3);text-decoration:none;margin-bottom:10px;transition:color .2s;font-weight:300}
+.footer-col a:hover{color:var(--text2)}
+.footer-bottom{max-width:1100px;margin:0 auto;padding:24px 2.5rem 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--text3);font-weight:300}
 
-/* SEARCH PAGE */
-.shero{background:var(--deep);padding:2.2rem 1.5rem 2rem}
-.shero-in{max-width:900px;margin:0 auto}
-.shero h1{font-family:'Playfair Display',serif;color:#fff;font-size:1.9rem;margin:.5rem 0 .35rem}
-.shero p{color:var(--mist);font-size:.88rem;line-height:1.55;max-width:620px}
-.empty{text-align:center;padding:3rem 1.5rem;color:var(--light)}
-.empty h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--deep);margin-bottom:.6rem}
-
-@media(max-width:820px){
-  .twocol{grid-template-columns:1fr}
-  .sbar-side{position:static}
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .features-grid{grid-template-columns:1fr 1fr}
+  .feature-card.featured{grid-column:span 1}
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .steps-grid::before{display:none}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:40px}
+  .search-layout{grid-template-columns:1fr}
+  .detail-grid{grid-template-columns:1fr}
+  .visa-info-grid{grid-template-columns:1fr}
   .nav-links{display:none}
-  .hamburger{display:flex}
-  .apair{grid-template-columns:1fr}
-  .ahero{height:300px}
-  .ahcontent{padding:1.5rem}
-  .sbar select{display:none}
 }
-@media(max-width:480px){
-  .hero{padding:3rem 1rem 4.5rem}
-  .acontent{padding:1.5rem 1rem 2.5rem}
-  .hero h1{font-size:1.9rem}
-  .back-btn span{display:none}
-  .back-btn{padding:8px 12px}
+@media(max-width:600px){
+  .features-grid{grid-template-columns:1fr}
+  .hero-stats{flex-wrap:wrap;gap:20px}
+  .tc-breakdown{grid-template-columns:repeat(2,1fr)}
+  .footer-inner{grid-template-columns:1fr;gap:32px}
+  .budget-controls{grid-template-columns:1fr}
 }
+@keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeInUp .4s ease forwards}
 </style>
 </head>
 <body>
-<div id="pgbar"></div>
 
+<!-- ── NAV ── -->
 <nav>
-  <div class="logo" onclick="goHome()">The <span>Shoreline</span></div>
-  <ul class="nav-links" id="mnav">
-    <li><a onclick="filterCat('beaches')" data-cat="beaches">Beaches</a></li>
-    <li><a onclick="filterCat('food')" data-cat="food">Food</a></li>
-    <li><a onclick="filterCat('walks')" data-cat="walks">Walks</a></li>
-    <li><a onclick="goHome()">All Guides</a></li>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L11.2 7H16.5L12.2 10.1L13.8 15.5L9 12.3L4.2 15.5L5.8 10.1L1.5 7H6.8L9 2Z" fill="#0a0d0f"/></svg>
+    </div>
+    <span class="nav-logo-text">SmartBudget Travel</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#app">Try it</a></li>
   </ul>
-  <button class="hamburger" id="hbg" onclick="toggleMob()" aria-label="Menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="back-btn" id="bkbtn" onclick="goHome()" role="button" tabindex="0">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    <span>Back to guides</span>
+  <div class="nav-cta">
+    <a href="#app" class="btn-nav">Sign in</a>
+    <a href="#app" class="btn-nav btn-nav-primary">Get started free</a>
   </div>
 </nav>
 
-<div class="mobile-nav" id="mobnav">
-  <a onclick="filterCat('beaches');toggleMob()">Beaches</a>
-  <a onclick="filterCat('food');toggleMob()">Food &amp; Drink</a>
-  <a onclick="filterCat('walks');toggleMob()">Walks</a>
-  <a onclick="goHome();toggleMob()">All Guides</a>
-</div>
-
-<div class="ad-top">Advertisement — 728×90 Leaderboard · Google AdSense / Mediavine</div>
-
-<!-- ══════════ HOME ══════════ -->
-<div class="page active" id="page-home">
-  <div class="hero">
-    <p class="hero-eye">Your guide to England's coastline</p>
-    <h1>Find Your <em>Perfect</em> British Seaside Escape</h1>
-    <p class="hero-sub">Hidden coves, chippy trails, coastal walks and honest local reviews — all along the Kent coast and beyond.</p>
-    <div class="sw">
-      <div class="sbar">
-        <select id="stype"><option value="all">All types</option><option value="beach">Beaches</option><option value="food">Food</option><option value="walk">Walks</option></select>
-        <input type="search" id="sinput" placeholder="Try 'Whitstable', 'CT5', 'Botany Bay'…" autocomplete="off" oninput="handleSearch(this.value)" onkeydown="if(event.key==='Enter'){handleSearch(this.value,true)}">
-        <button onclick="handleSearch(document.getElementById('sinput').value,true)">Search</button>
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Live cost-of-living data</div>
+      <h1 class="hero-h1 syne">Find where<br><em>your money</em><br>takes you.</h1>
+      <p class="hero-sub">Enter your budget, we find the cheapest flights, hotels, and generate a realistic travel budget using real cost-of-living data from your destination.</p>
+      <div class="hero-actions">
+        <a href="#app" class="btn-hero btn-hero-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1L10 6H15L11 9.5L12.5 14.5L8 11L3.5 14.5L5 9.5L1 6H6L8 1Z"/></svg>
+          Start planning free
+        </a>
+        <a href="#how-it-works" class="btn-hero btn-hero-ghost">See how it works →</a>
       </div>
-      <div class="sdrop" id="sdrop"></div>
-    </div>
-    <div class="hero-btns">
-      <button class="bp" onclick="showArt('beaches')">Explore beaches</button>
-      <button class="bo" onclick="showArt('chippy')">Best chippies in Kent</button>
-    </div>
-  </div>
-
-  <div class="regions">
-    <div class="container">
-      <div class="rin">
-        <div class="rp active" onclick="filterReg(this,'all')">🌊 All Coast</div>
-        <div class="rp" onclick="filterReg(this,'kent')">Kent &amp; East Sussex</div>
-        <div class="rp" onclick="filterReg(this,'dorset')">Dorset &amp; Jurassic</div>
-        <div class="rp" onclick="filterReg(this,'cornwall')">Cornwall &amp; Devon</div>
-        <div class="rp" onclick="filterReg(this,'norfolk')">Norfolk Broads</div>
-        <div class="rp" onclick="filterReg(this,'yorkshire')">Yorkshire Coast</div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-val syne">180+</div><div class="hero-stat-label">Destinations</div></div>
+        <div><div class="hero-stat-val syne">Live</div><div class="hero-stat-label">Scraped data</div></div>
+        <div><div class="hero-stat-val syne">Free</div><div class="hero-stat-label">To get started</div></div>
       </div>
     </div>
-  </div>
-
-  <section>
-    <div class="container">
-      <div class="sh"><h2>Featured guides</h2><a onclick="goHome()">View all →</a></div>
-      <div class="cgrid" id="cgrid">
-        <article class="card" data-cat="beaches" data-region="kent" onclick="showArt('beaches')">
-          <div class="cimg">
-            <img src="https://images.pexels.com/photos/18003984/pexels-photo-18003984.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Botany Bay chalk cliffs Broadstairs Kent" loading="eager">
-            <span class="ctag tb">Beaches</span>
-          </div>
-          <div class="cbody">
-            <h3>The 7 best beaches on the Kent coast</h3>
-            <p>From Botany Bay's chalk stacks to wild Sandwich Bay — a local's guide to the finest sand and shingle in the south-east.</p>
-            <div class="cmeta"><span>◷ 8 min read</span><span>◎ Kent coast</span></div>
-          </div>
-        </article>
-        <article class="card" data-cat="food" data-region="kent" onclick="showArt('chippy')">
-          <div class="cimg">
-            <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fresh fish and chips English coast" loading="eager">
-            <span class="ctag tr">Food &amp; Drink</span>
-          </div>
-          <div class="cbody">
-            <h3>The best fish &amp; chip shops on the Kent coast</h3>
-            <p>We ate our way from Whitstable to Folkestone. These are the chippies worth queuing for — and the ones to dodge.</p>
-            <div class="cmeta"><span>◷ 9 min read</span><span>◎ Kent coast</span></div>
-          </div>
-        </article>
-        <article class="card" data-cat="walks" data-region="kent" onclick="showArt('saxonshore')">
-          <div class="cimg">
-            <img src="https://images.pexels.com/photos/3651820/pexels-photo-3651820.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Coastal path beach huts shingle shore" loading="eager">
-            <span class="ctag tg">Walks</span>
-          </div>
-          <div class="cbody">
-            <h3>Whitstable to Herne Bay: the perfect day's coastal walk</h3>
-            <p>Five flat miles of shingle shore, beach huts and big estuary views on the Saxon Shore Way.</p>
-            <div class="cmeta"><span>◷ 7 min read</span><span>◎ North Kent</span></div>
-          </div>
-        </article>
-        <article class="card" data-cat="beaches" data-region="kent" onclick="showArt('dogbeaches')">
-          <div class="cimg">
-            <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Happy dog running on sandy beach Kent coast" loading="lazy">
-            <span class="ctag tb">Beaches</span>
-          </div>
-          <div class="cbody">
-            <h3>The best dog-friendly beaches on the Kent coast</h3>
-            <p>Year-round access, off-lead runs, and cafés that welcome muddy paws — our guide to Kent's finest beaches for dogs.</p>
-            <div class="cmeta"><span>◷ 7 min read</span><span>◎ Kent coast</span></div>
-          </div>
-        </article>
-        <article class="card" data-cat="beaches" data-region="kent" onclick="showArt('deal')">
-          <div class="cimg">
-            <img src="https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Colourful fishing boats on the beach at Deal Kent" loading="lazy">
-            <span class="ctag tb">Towns</span>
-          </div>
-          <div class="cbody">
-            <h3>Deal: the best town on the Kent coast you haven't visited yet</h3>
-            <p>Two castles, a genuine fishing beach, one of the finest pubs in East Kent, and no tourist tat in sight.</p>
-            <div class="cmeta"><span>◷ 8 min read</span><span>◎ East Kent</span></div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section style="background:var(--foam)">
-    <div class="container">
-      <div class="twocol">
-        <div>
-          <div class="sh"><h2>Latest from the shore</h2></div>
-          <div class="alist">
-            <div class="ai" onclick="showArt('beaches')">
-              <img class="at" src="https://images.pexels.com/photos/18003984/pexels-photo-18003984.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Botany Bay chalk cliffs" loading="lazy">
-              <div class="ain"><span class="acat">Beaches</span><h4>Botany Bay: Kent's most dramatic chalk-cliff beach</h4><p>Chalk stacks, rock pools, and sand that vanishes at high tide.</p></div>
+    <div>
+      <div class="hero-widget">
+        <div class="widget-tabs">
+          <button class="widget-tab active" onclick="switchHeroTab(this,'plan')">Plan a trip</button>
+          <button class="widget-tab" onclick="switchHeroTab(this,'find')">Find by budget</button>
+        </div>
+        <div class="widget-body">
+          <div id="hp-plan">
+            <label class="wf-label">From</label>
+            <select class="wf-input wf-sel" id="hw-origin"><option>London (LHR)</option><option>Manchester (MAN)</option><option>Edinburgh (EDI)</option><option>Birmingham (BHX)</option></select>
+            <label class="wf-label">To</label>
+            <select class="wf-input wf-sel" id="hw-dest"><option>Budapest, Hungary</option><option>Krakow, Poland</option><option>Lisbon, Portugal</option><option>Prague, Czechia</option><option>Bangkok, Thailand</option><option>Tokyo, Japan</option><option>New York, USA</option><option>Bali, Indonesia</option></select>
+            <div class="wf-row" style="margin-bottom:12px">
+              <div><label class="wf-label">Depart</label><input type="date" class="wf-input" id="hw-dep" value="2025-08-01"></div>
+              <div><label class="wf-label">Return</label><input type="date" class="wf-input" id="hw-ret" value="2025-08-05"></div>
             </div>
-            <div class="ai" onclick="showArt('chippy')">
-              <img class="at" src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Fish and chips" loading="lazy">
-              <div class="ain"><span class="acat">Food &amp; Drink</span><h4>VC Jones, Whitstable: still frying in beef dripping since 1962</h4><p>One of the last chippies in England using the old method.</p></div>
+            <div class="style-pills">
+              <button class="style-pill active" onclick="setPillStyle(this,'budget')">Budget</button>
+              <button class="style-pill" onclick="setPillStyle(this,'normal')">Normal</button>
+              <button class="style-pill" onclick="setPillStyle(this,'luxury')">Luxury</button>
             </div>
-            <div class="ai" onclick="showArt('saxonshore')">
-              <img class="at" src="https://images.pexels.com/photos/3651820/pexels-photo-3651820.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Whitstable beach huts coastal path" loading="lazy">
-              <div class="ain"><span class="acat">Walks</span><h4>The Saxon Shore Way: 163 miles from Gravesend to Hastings</h4><p>Roman forts, marshland skies, oyster towns and chalk cliffs.</p></div>
+            <button class="btn-search" onclick="heroSearch()">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Search cheapest trips
+            </button>
+          </div>
+          <div id="hp-find" style="display:none">
+            <label class="wf-label">Total budget (£)</label>
+            <input type="number" class="wf-input" id="hw-budget" value="500" min="100" max="5000">
+            <div class="wf-row" style="margin-bottom:12px">
+              <div><label class="wf-label">Nights</label><input type="number" class="wf-input" id="hw-nights" value="4" min="1" max="30"></div>
+              <div><label class="wf-label">From</label><select class="wf-input wf-sel"><option>London (LHR)</option><option>Manchester (MAN)</option></select></div>
             </div>
-            <div class="ai" onclick="showArt('beaches')">
-              <img class="at" src="https://images.pexels.com/photos/1004409/pexels-photo-1004409.jpeg?auto=compress&cs=tinysrgb&w=200" alt="White cliffs coastal nature reserve" loading="lazy">
-              <div class="ain"><span class="acat">Beaches</span><h4>Samphire Hoe: the nature reserve built from Channel Tunnel spoil</h4><p>Nearly 5 million cubic metres of chalk became one of Kent's most unusual coastlines.</p></div>
+            <div class="style-pills">
+              <button class="style-pill active" onclick="setPillStyle(this,'budget')">Budget</button>
+              <button class="style-pill" onclick="setPillStyle(this,'normal')">Normal</button>
+              <button class="style-pill" onclick="setPillStyle(this,'luxury')">Luxury</button>
             </div>
-            <div class="ai" onclick="showArt('dogbeaches')">
-              <img class="at" src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Dog on beach Kent coast" loading="lazy">
-              <div class="ain"><span class="acat">Beaches</span><h4>The best dog-friendly beaches on the Kent coast — year-round guide</h4><p>Which beaches have seasonal bans, and where dogs are welcome every single day.</p></div>
-            </div>
-            <div class="ai" onclick="showArt('deal')">
-              <img class="at" src="https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Deal fishing boats Kent" loading="lazy">
-              <div class="ain"><span class="acat">Towns</span><h4>Deal: two castles, a fishing beach, and one of the finest pubs in East Kent</h4><p>The best town on the Kent coast you haven't visited yet.</p></div>
-            </div>
+            <button class="btn-search" onclick="heroFind()">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Find my destinations
+            </button>
           </div>
         </div>
-        <aside class="sbar-side">
-          <div class="sad"><div class="albl">Advertisement</div><div class="aslot"><span>300×250 Medium Rectangle</span><span style="font-size:.62rem">Google AdSense / Mediavine</span></div></div>
-          <div class="tidecard">
-            <h4>🌊 Tide times — Whitstable</h4>
-            <div id="tiderows"></div>
-            <div class="tide-loc">Indicative · Verify at tidetimes.org.uk</div>
-          </div>
-          <div class="swidget">
-            <h4>Browse by topic</h4>
-            <div class="pillcloud">
-              <button class="pill" onclick="filterCat('beaches')">Beaches</button>
-              <button class="pill" onclick="filterCat('food')">Fish &amp; chips</button>
-              <button class="pill" onclick="filterCat('walks')">Dog walks</button>
-              <button class="pill">Family days</button><button class="pill">Campsites</button>
-              <button class="pill">Seaside pubs</button><button class="pill">Fossil hunting</button>
-              <button class="pill">Kayaking</button><button class="pill">Budget trips</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="section" id="features">
+  <div class="section-label"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#c8f53c" stroke-width="1.5"/><path d="M6 4v2.5L7.5 8" stroke="#c8f53c" stroke-width="1.5" stroke-linecap="round"/></svg>Everything you need</div>
+  <h2 class="section-h2 syne">No more budget<br>surprises abroad.</h2>
+  <p class="section-sub">Real scraped data, real prices. We pull cost-of-living data directly from Numbeo, flight prices from Ryanair and Amadeus, and visa rules from global databases.</p>
+  <div class="features-grid">
+    <div class="feature-card featured">
+      <div class="feature-icon fi-acc">✈️</div>
+      <h3 class="feature-h3 syne">Cheapest flight + hotel combos</h3>
+      <p class="feature-p">We search Ryanair's public API, Amadeus flight data, and scrape Booking.com simultaneously to find the absolute cheapest total combination — not just the cheapest individual part.</p>
+      <div class="feature-tags"><span class="feature-tag">Amadeus API</span><span class="feature-tag">Ryanair API</span><span class="feature-tag">Booking.com scrape</span><span class="feature-tag">Hostelworld</span></div>
+    </div>
+    <div class="feature-card"><div class="feature-icon fi-blue">💰</div><h3 class="feature-h3 syne">Real budget generator</h3><p class="feature-p">Daily spending estimates scraped directly from Numbeo — the world's largest crowd-sourced cost-of-living database. Budget, normal, or luxury adjustments.</p></div>
+    <div class="feature-card"><div class="feature-icon fi-ora">🛂</div><h3 class="feature-h3 syne">Visa requirements</h3><p class="feature-p">Live visa data from Sherpa API and Passportindex.org, cross-referenced with our curated database. Checks your passport country automatically.</p></div>
+    <div class="feature-card"><div class="feature-icon fi-grn">💉</div><h3 class="feature-h3 syne">Vaccination advice</h3><p class="feature-p">Scraped from CDC Travelers' Health pages and NHS Fit for Travel. Required, recommended, and considerations — all in one place.</p></div>
+    <div class="feature-card"><div class="feature-icon fi-acc">🌍</div><h3 class="feature-h3 syne">Smart trip finder</h3><p class="feature-p">Enter your budget and let us find where you can afford to go. We rank all destinations by value and show full breakdowns for each one.</p></div>
+    <div class="feature-card"><div class="feature-icon" style="background:rgba(255,90,90,.1)">🗺️</div><h3 class="feature-h3 syne">Local travel info</h3><p class="feature-p">Currency, plug types, transport systems, tipping culture, safety ratings, and emergency numbers — from REST Countries API and curated research.</p></div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section" id="how-it-works">
+  <div class="section" style="padding-top:0;padding-bottom:0">
+    <div class="section-label">Simple process</div>
+    <h2 class="section-h2 syne">Plan your trip in<br>under 60 seconds.</h2>
+    <div class="steps-grid">
+      <div class="step"><div class="step-num syne">1</div><h3 class="syne">Enter your details</h3><p>Departure city, dates, number of travellers, and travel style. That's all we need.</p></div>
+      <div class="step"><div class="step-num syne">2</div><h3 class="syne">We scrape live prices</h3><p>Real-time searches across Ryanair, Amadeus, and Booking.com — compared simultaneously.</p></div>
+      <div class="step"><div class="step-num syne">3</div><h3 class="syne">Get your real budget</h3><p>A full daily spend breakdown using live Numbeo cost-of-living data from your destination.</p></div>
+      <div class="step"><div class="step-num syne">4</div><h3 class="syne">Travel with confidence</h3><p>Visa requirements, vaccination advice, local info — all auto-populated for your destination.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DESTINATIONS ── -->
+<section class="dest-section" id="destinations">
+  <div style="max-width:1100px;margin:0 auto;padding:0 2.5rem;margin-bottom:40px">
+    <div class="section-label">Popular picks</div>
+    <h2 class="section-h2 syne" style="font-size:clamp(28px,3vw,40px)">Trending destinations from London</h2>
+  </div>
+  <div class="dest-scroll" id="dest-scroll"></div>
+</section>
+
+<!-- ── APP ── -->
+<section class="app-section" id="app">
+  <div class="app-inner">
+    <div class="app-hdr">
+      <div class="section-label">Live demo</div>
+      <h2 class="section-h2 syne">Try it right here.</h2>
+      <p class="section-sub" style="margin:0 auto">Full interactive trip planner. All data fetched live from the backend API.</p>
+    </div>
+
+    <div class="api-status" id="api-status">
+      <div class="api-dot loading" id="api-dot"></div>
+      <span id="api-status-text">Connecting to API...</span>
+    </div>
+
+    <div class="app-shell">
+      <div class="app-top-bar">
+        <div class="app-dot dot-r"></div><div class="app-dot dot-y"></div><div class="app-dot dot-g"></div>
+        <div class="app-url">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="4" width="9" height="7" rx="1.5" stroke="#5a5856" stroke-width="1"/><path d="M4 4V3a2 2 0 0 1 4 0v1" stroke="#5a5856" stroke-width="1" stroke-linecap="round"/></svg>
+          <span id="api-url-display">localhost:8000</span>
+        </div>
+      </div>
+      <div class="app-tabs">
+        <button class="app-tab active" onclick="switchAppTab('search',this)">✈️ Search trips</button>
+        <button class="app-tab" onclick="switchAppTab('budget',this)">💰 Budget finder</button>
+        <button class="app-tab" onclick="switchAppTab('visa',this)">🛂 Visa checker</button>
+      </div>
+      <div class="app-body">
+
+        <!-- SEARCH TAB -->
+        <div id="tab-search">
+          <div id="search-form-view" class="search-layout">
+            <div class="form-box">
+              <div class="sec-title">Trip details</div>
+              <div class="f-group"><label class="f-label">From</label><select class="f-ctrl" id="s-origin"><option>London (LHR)</option><option>Manchester (MAN)</option><option>Edinburgh (EDI)</option><option>Birmingham (BHX)</option></select></div>
+              <div class="f-group"><label class="f-label">To</label><select class="f-ctrl" id="s-dest"><option>Budapest, Hungary</option><option>Krakow, Poland</option><option>Lisbon, Portugal</option><option>Prague, Czechia</option><option>Bangkok, Thailand</option><option>Tokyo, Japan</option><option>New York, USA</option><option>Bali, Indonesia</option></select></div>
+              <div class="f-group"><label class="f-label">Depart</label><input type="date" class="f-ctrl" id="s-dep" value="2025-08-01"></div>
+              <div class="f-group"><label class="f-label">Return</label><input type="date" class="f-ctrl" id="s-ret" value="2025-08-05"></div>
+              <div class="f-group f-row">
+                <div><label class="f-label">Travellers</label><select class="f-ctrl" id="s-pax"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+                <div><label class="f-label">Passport</label><select class="f-ctrl" id="s-passport"><option value="GB">🇬🇧 British</option><option value="US">🇺🇸 American</option><option value="EU">🇪🇺 EU</option><option value="AU">🇦🇺 Australian</option><option value="IN">🇮🇳 Indian</option></select></div>
+              </div>
+              <div class="sec-title" style="margin-top:16px">Travel style</div>
+              <div class="sty-btns">
+                <button class="sty-btn active" onclick="setStyBtn(this,'budget')">Budget</button>
+                <button class="sty-btn" onclick="setStyBtn(this,'normal')">Normal</button>
+                <button class="sty-btn" onclick="setStyBtn(this,'luxury')">Luxury</button>
+              </div>
+              <div class="error-banner" id="search-error"></div>
+              <button class="btn-full" id="search-btn" onclick="doSearch()">Search trips →</button>
+            </div>
+            <div>
+              <div class="loading" id="search-loading">
+                <div class="spinner"></div>
+                <div class="loading-msg" id="search-loading-msg">Searching flights...</div>
+              </div>
+              <div id="search-results">
+                <div class="empty"><div class="e-icon">✈️</div>Fill in your trip details and hit Search to find the cheapest options.</div>
+              </div>
             </div>
           </div>
-          <div class="swidget">
-            <h4>Quick postcode search</h4>
-            <p>Find beaches and attractions near your postcode.</p>
-            <div style="display:flex;gap:.5rem">
-              <input type="text" id="pcquick" placeholder="e.g. CT5, CT9, ME13" maxlength="4"
-                style="flex:1;border:1px solid #ddd;border-radius:4px;padding:.5rem .7rem;font-family:Lato,sans-serif;font-size:.85rem;outline:none"
-                onkeydown="if(event.key==='Enter')qpc()">
-              <button class="bp" style="padding:.5rem .9rem;font-size:.78rem" onclick="qpc()">Go</button>
+          <div id="search-detail" style="display:none"></div>
+        </div>
+
+        <!-- BUDGET TAB -->
+        <div id="tab-budget" style="display:none">
+          <div class="budget-panel">
+            <div class="budget-hero">
+              <div style="font-size:12px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">Your total budget</div>
+              <div class="budget-big"><span class="budget-big-sym">£</span><input class="budget-big-inp" type="number" id="b-budget" value="500" min="100" max="5000"></div>
+              <div style="font-size:12px;color:var(--text3)">total trip budget per person</div>
             </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px" class="budget-controls">
+              <div class="f-group" style="margin:0"><label class="f-label">Nights</label><input type="number" class="f-ctrl" id="b-nights" value="4" min="1" max="30"></div>
+              <div class="f-group" style="margin:0"><label class="f-label">From</label><select class="f-ctrl"><option>London (LHR)</option><option>Manchester (MAN)</option></select></div>
+              <div class="f-group" style="margin:0"><label class="f-label">Travellers</label><select class="f-ctrl" id="b-pax"><option>1</option><option>2</option><option>3</option></select></div>
+            </div>
+            <div class="sty-btns" style="margin-bottom:14px">
+              <button class="sty-btn active" onclick="setStyBtn(this,'budget')">Budget</button>
+              <button class="sty-btn" onclick="setStyBtn(this,'normal')">Normal</button>
+              <button class="sty-btn" onclick="setStyBtn(this,'luxury')">Luxury</button>
+            </div>
+            <button class="btn-full" style="margin-bottom:20px" onclick="doBudgetFind()">Find where I can go →</button>
+            <div class="loading" id="budget-loading"><div class="spinner"></div><div class="loading-msg">Finding destinations...</div></div>
+            <div id="budget-results"></div>
           </div>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <div class="container" style="padding:1.3rem 1.5rem .5rem">
-    <div style="background:#fff;border:1px dashed #ccc;border-radius:var(--r);padding:.7rem;text-align:center;font-size:.67rem;color:#bbb;letter-spacing:.05em">Advertisement — 728×90 In-Content (highest RPM placement)</div>
-  </div>
-
-  <div class="nl">
-    <h3>Weekly tide mail</h3>
-    <p>New guides, hidden spots, and weekend ideas — straight to your inbox every Friday.</p>
-    <div class="nlform"><input type="email" id="nlemail" placeholder="your@email.com"><button onclick="subNL()">Subscribe</button></div>
-    <div class="nlsuccess" id="nlsuc">✓ You're on the list — see you Friday!</div>
-  </div>
-  <footer><strong>The Shoreline</strong> · England's coastal travel guide<br><a onclick="filterCat('beaches')">Beaches</a> · <a onclick="filterCat('food')">Food</a> · <a onclick="filterCat('walks')">Walks</a> · About · Contact · Advertise<br><span style="opacity:.4;font-size:.68rem">© 2026 The Shoreline. Made with sea air in Whitstable, Kent.</span></footer>
-</div>
-
-
-<!-- ══════════ BEACHES ARTICLE ══════════ -->
-<div class="page" id="page-beaches">
-  <div class="ahero">
-    <img src="https://images.pexels.com/photos/18003984/pexels-photo-18003984.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Botany Bay chalk stacks and sandy beach Broadstairs Kent" loading="eager" fetchpriority="high">
-    <div class="aoverlay"></div>
-    <div class="ahcontent">
-      <div class="abread" onclick="goHome()">← The Shoreline / Beaches / Kent</div>
-      <h1>The 7 Best Beaches on the Kent Coast — a Local's Guide</h1>
-      <div class="ahmeta"><time datetime="2026-03-15">📅 Updated March 2026</time><span>◷ 8 min read</span><span>🏖 Beaches</span><span>📍 Kent coast</span></div>
-    </div>
-  </div>
-
-  <div class="acontent">
-    <p>Kent has over 350 miles of coastline and more than 50 beaches, with nine holding the Blue Flag award for water quality, safety and facilities in 2025. But the finest stretches aren't always the ones on the tourist boards. We've walked the lot, talked to the locals, and picked the seven that genuinely deliver — dramatic, peaceful, and never far from a great pub.</p>
-    <div class="ibox"><strong>Practical note — tides matter here</strong><p>Several of Kent's best beaches are tidal. Botany Bay and Kingsgate Bay can see sand disappear entirely at high tide. Always check before you go — <strong>tidetimes.org.uk</strong> and the Met Office app are both free and reliable.</p></div>
-
-    <h2>1. Botany Bay, near Broadstairs</h2>
-    <img class="afull" src="https://images.pexels.com/photos/18003984/pexels-photo-18003984.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Dramatic chalk stacks and sandy cove at Botany Bay Broadstairs Kent" loading="lazy">
-    <p class="imgcap">The chalk stacks at Botany Bay are most dramatic at low tide on a clear morning. Photo: Andras Stefuca / Pexels</p>
-    <p>If you want one photograph that sums up the Kent coast at its most cinematic, walk down to Botany Bay at low tide on a clear morning. The chalk stacks — those great white columns left behind as the cliff slowly erodes — are among the most striking formations in the south-east, and the sandy bay between them is genuinely beautiful. The rock pools at the base of the cliffs are some of the richest in Thanet, drawing fossil hunters as well as families.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Botany Bay</div>
-        <h4>Botany Bay, Cliftonville, Broadstairs</h4>
-        <p>Sandy cove backed by dramatic chalk cliffs — one of Kent's most photographed beaches.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Marine Drive, Cliftonville, Broadstairs CT10 3LG</strong><br>
-          <strong>Getting there:</strong> Car park on Botany Road, 10 min walk down cliff path. By train: Broadstairs station (15 min walk).<br>
-          <strong>Best for:</strong> Chalk stacks, fossil hunting, rock pools. <strong>Dogs:</strong> Restricted May–Sep, unrestricted Oct–Apr.</p>
         </div>
-      </div>
-    </div>
 
-    <h2>2. Kingsgate Bay, Broadstairs</h2>
-    <img class="afull" src="https://images.pexels.com/photos/4254555/pexels-photo-4254555.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Sea caves and chalk cliffs at a sheltered coastal bay" loading="lazy">
-    <p class="imgcap">Kingsgate Bay's chalk sea arch and caves are best explored at low tide.</p>
-    <p>Tucked between Margate and Broadstairs, Kingsgate Bay is Botany Bay's slightly wilder sibling. The chalk cliffs are just as dramatic, but at low tide the beach reveals a genuine sea arch and a series of caves irresistible to anyone with a torch. The bay stays quieter than Viking Bay because it's harder to find — entirely the point. From here you can walk north to Botany Bay and south toward Joss Bay, the best surf beach in Thanet.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Kingsgate Bay</div>
-        <h4>Kingsgate Bay, Broadstairs</h4>
-        <p>Sea caves, a chalk arch, and cliff walks — quieter than Viking Bay year-round.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Kingsgate Avenue, Broadstairs CT10 3QA</strong><br>
-          Park on Kingsgate Avenue, short footpath to beach. Joss Bay Surf School 5 min walk south. Dogs welcome year-round.</p>
+        <!-- VISA TAB -->
+        <div id="tab-visa" style="display:none">
+          <div class="visa-panel">
+            <div class="form-box" style="margin-bottom:20px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+                <div class="f-group" style="margin:0"><label class="f-label">Your passport</label>
+                  <select class="f-ctrl" id="v-passport">
+                    <option value="GB">🇬🇧 British</option><option value="US">🇺🇸 American</option>
+                    <option value="EU">🇪🇺 EU citizen</option><option value="AU">🇦🇺 Australian</option>
+                    <option value="IN">🇮🇳 Indian</option><option value="CN">🇨🇳 Chinese</option>
+                  </select>
+                </div>
+                <div class="f-group" style="margin:0"><label class="f-label">Destination</label>
+                  <select class="f-ctrl" id="v-dest">
+                    <option value="HU">🇭🇺 Hungary</option><option value="PL">🇵🇱 Poland</option>
+                    <option value="PT">🇵🇹 Portugal</option><option value="CZ">🇨🇿 Czechia</option>
+                    <option value="TH">🇹🇭 Thailand</option><option value="JP">🇯🇵 Japan</option>
+                    <option value="US">🇺🇸 United States</option><option value="ID">🇮🇩 Indonesia</option>
+                  </select>
+                </div>
+              </div>
+              <button class="btn-full" onclick="doVisaCheck()">Check visa requirements →</button>
+            </div>
+            <div class="loading" id="visa-loading"><div class="spinner"></div><div class="loading-msg">Checking requirements...</div></div>
+            <div id="visa-result"></div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="aad">Advertisement — 728×90 Mid-Article (premium placement)</div>
-
-    <h2>3. Viking Bay, Broadstairs</h2>
-    <img class="afull" src="https://images.pexels.com/photos/3581916/pexels-photo-3581916.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Sandy horseshoe bay with beach huts and pier British seaside" loading="lazy">
-    <p class="imgcap">Viking Bay is Broadstairs at its most quintessentially British — the beach huts and golden sand are a classic combination.</p>
-    <p>Broadstairs is the classic Kent seaside town — Charles Dickens had a summer home here and you can see why. Viking Bay is the centrepiece: a neat horseshoe of golden sand backed by candy-coloured beach huts, a promenade of independent cafés, and cliffs that glow white in afternoon sun. Blue Flag awarded and lifeguarded in summer.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Viking Bay</div>
-        <h4>Viking Bay, Broadstairs</h4>
-        <p>Blue Flag beach, beach huts, lifeguards in summer — Broadstairs' showpiece bay.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Broadstairs town centre CT10 1HX</strong><br>
-          Pay-and-display parking in town. Direct trains from London St Pancras (1h 20min). For Louisa Bay (quieter alternative) walk south along the cliff.</p>
-        </div>
-      </div>
-    </div>
-
-    <h2>4. Tankerton Beach, Whitstable</h2>
-    <div class="apair">
-      <img src="https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Colourful beach huts along a shingle beach at sunset" loading="lazy">
-      <img src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Shingle beach estuary views Kent coast England" loading="lazy">
-    </div>
-    <p class="imgcap">Tankerton's west-facing beach huts catch the full force of a Thames Estuary sunset.</p>
-    <p>Tankerton is Whitstable's eastern stretch — a long shingle beach lined with the most photogenic beach huts in Kent, facing west over the estuary. On a clear autumn evening this is one of the finest free views on the coast, the light coming gold toward the ghostly Maunsell Sea Forts at Red Sands. At low tide, The Street — a natural shingle ridge — extends half a mile out to sea. Walking it with water on both sides is an entirely memorable experience.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Tankerton Beach</div>
-        <h4>Tankerton Beach, Whitstable</h4>
-        <p>Famous beach huts, The Street at low tide, and some of the best sunsets on the coast.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Marine Parade, Tankerton, Whitstable CT5 2BE</strong><br>
-          Parking on Marine Parade. Whitstable station 1.5 miles. Continue east 5 miles to Herne Bay along the Saxon Shore Way.</p>
-        </div>
-      </div>
-    </div>
-
-    <h2>5. Samphire Hoe, Dover</h2>
-    <img class="afull" src="https://images.pexels.com/photos/1004409/pexels-photo-1004409.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="White chalk cliffs towering above a coastal nature reserve" loading="lazy">
-    <p class="imgcap">Samphire Hoe sits at the foot of the White Cliffs of Dover — access is via a tunnel through the chalk.</p>
-    <p>This one has an extraordinary back story. Samphire Hoe is a nature reserve created from nearly five million cubic metres of chalk excavated to build the Channel Tunnel. Ecologists landscaped it into an undulating coastal shelf and seeded it with wildflowers. Today it hosts over 200 plant species, 220 bird species, and 380 moths. The access road runs through a cliff tunnel, giving arrival a mildly dramatic feeling.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Samphire Hoe</div>
-        <h4>Samphire Hoe Nature Reserve, Dover</h4>
-        <p>A remarkable conservation success story beneath the White Cliffs — wheelchair accessible, wildlife-rich, and free.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Western Heights, Dover CT17 9FL</strong><br>
-          Free car park. Access via cliff tunnel off the A20 — follow signs from Western Docks roundabout. Gate locked at dusk.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="aad">Advertisement — 300×250 Inline</div>
-
-    <h2>6. Stone Bay, Broadstairs</h2>
-    <p>A quiet curve of flat sands just a short walk from Broadstairs town centre. Stone Bay sits sheltered by chalk cliffs creating a slightly warmer microclimate. Blue Flag and Seaside Award both held, it stays noticeably calmer than Viking Bay even at peak summer. Families love it for rock pooling; dog owners for year-round unrestricted access.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Stone Bay</div>
-        <h4>Stone Bay, Broadstairs</h4>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Stone Road, Broadstairs CT10 1EF</strong><br>
-          Small car park at the top of the cliff steps. Dogs welcome unrestricted all year. Blue Flag and Seaside Award holder.</p>
-        </div>
-      </div>
-    </div>
-
-    <h2>7. Sandwich Bay</h2>
-    <p>Access is via a private toll road through a golf course estate — a small fee keeps casual visitor numbers low and the atmosphere wonderfully private. The bay is a long sweep of flat sands and tidal pools backed by dunes. The northern end borders the River Stour and is one of the finest spots on the Kent coast for migrating waders. Pack a thermos — there are no facilities on the beach.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Sandwich Bay</div>
-        <h4>Sandwich Bay, Sandwich</h4>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Sandwich Bay Road, Sandwich CT13 9PF</strong><br>
-          Toll road access (small fee per car). Dogs welcome year-round. No facilities on beach — bring everything you need.</p>
-        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="related"><div class="container"><div class="sh"><h2>You might also like</h2></div><div class="rgrid">
-    <article class="card" onclick="showArt('chippy')"><div class="cimg"><img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Fish and chips" loading="lazy"><span class="ctag tr">Food &amp; Drink</span></div><div class="cbody"><h3>Best fish &amp; chip shops on the Kent coast</h3><p>From Whitstable to Folkestone — the chippies worth queuing for.</p><div class="cmeta"><span>◷ 9 min</span></div></div></article>
-    <article class="card" onclick="showArt('saxonshore')"><div class="cimg"><img src="https://images.pexels.com/photos/3651820/pexels-photo-3651820.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Coastal walk" loading="lazy"><span class="ctag tg">Walks</span></div><div class="cbody"><h3>Whitstable to Herne Bay: the perfect day's walk</h3><p>Five flat miles on the Saxon Shore Way.</p><div class="cmeta"><span>◷ 7 min</span></div></div></article>
-  </div></div></div>
-  <div class="nl"><h3>Weekly tide mail</h3><p>New guides, hidden spots, and weekend ideas every Friday.</p><div class="nlform"><input type="email" placeholder="your@email.com"><button>Subscribe</button></div></div>
-  <footer><strong>The Shoreline</strong> · England's coastal travel guide<br><span style="opacity:.4;font-size:.68rem">© 2026 The Shoreline.</span></footer>
-</div>
-
-
-<!-- ══════════ CHIPPY ARTICLE ══════════ -->
-<div class="page" id="page-chippy">
-  <div class="ahero">
-    <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Fresh fish and chips in newspaper wrapping by the sea" loading="eager" fetchpriority="high">
-    <div class="aoverlay"></div>
-    <div class="ahcontent">
-      <div class="abread" onclick="goHome()">← The Shoreline / Food &amp; Drink / Kent</div>
-      <h1>The Best Fish &amp; Chip Shops on the Kent Coast — We Ate Them All</h1>
-      <div class="ahmeta"><time datetime="2026-03-15">📅 Updated March 2026</time><span>◷ 9 min read</span><span>🍟 Food &amp; Drink</span><span>📍 Kent coast</span></div>
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div style="max-width:640px;margin:0 auto;padding:0 2.5rem">
+    <div class="section-label" style="justify-content:center">Start for free</div>
+    <h2 class="section-h2 syne" style="text-align:center">Ready to travel<br>smarter?</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 40px">Join thousands of budget travellers who plan every trip with SmartBudget Travel.</p>
+    <div style="text-align:center"><a href="#app" class="btn-hero btn-hero-primary" style="display:inline-flex">Get started — it's free <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    <div class="cta-badges">
+      <div class="cta-badge"><div class="cta-badge-dot"></div>No credit card needed</div>
+      <div class="cta-badge"><div class="cta-badge-dot"></div>Live scraped data</div>
+      <div class="cta-badge"><div class="cta-badge-dot"></div>180+ destinations</div>
+      <div class="cta-badge"><div class="cta-badge-dot"></div>Free forever plan</div>
     </div>
   </div>
+</section>
 
-  <div class="acontent">
-    <p>There is an argument — and we're willing to make it — that a truly great plate of fish and chips on the coast of Kent on a grey October afternoon is one of the finest experiences available in England. Proper batter. Thick chips. Salt air coming through the door. We ate our way from Whitstable in the north to Folkestone in the south.</p>
-    <div class="ibox"><strong>How we chose these</strong><p>We visited anonymously, paid our own way, and weighed batter quality, fish freshness, chip thickness, sourcing, and value. We also note the ones to skip.</p></div>
-
-    <img class="afull" src="https://images.pexels.com/photos/2765872/pexels-photo-2765872.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Whitstable harbour with colourful fishing boats and waterfront buildings" loading="lazy">
-    <p class="imgcap">Whitstable Harbour — start of any serious Kent seafood tour.</p>
-
-    <h2>Whitstable</h2>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/4553618/pexels-photo-4553618.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Traditional fish and chip shop exterior with queue outside" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">⭐ Our top pick in Whitstable — since 1962</div>
-        <h4>VC Jones — Traditional Fish &amp; Chips</h4>
-        <p>A genuine institution. <em>The Times</em> has rated it one of the best fish and chip shops in the UK. VC Jones is one of the last chippies in the south of England still frying in beef dripping, maintaining a tradition that predates the Second World War. A three-generation family business. The fat gives the batter a depth and richness that vegetable oil cannot replicate. Food is donated to local projects and cooking fat is recycled. Queue expected at weekends. Cash preferred.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>25 Harbour Street, Whitstable CT5 1AH</strong><br>Tel: 01227 272703 · <a href="https://www.vcjones.co.uk" target="_blank" style="color:var(--ocean)">vcjones.co.uk</a><br>Mon–Sat 11:30am–8pm · Sun 12–7pm (hours seasonal, check website)</p>
-        </div>
-      </div>
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L11.2 7H16.5L12.2 10.1L13.8 15.5L9 12.3L4.2 15.5L5.8 10.1L1.5 7H6.8L9 2Z" fill="#0a0d0f"/></svg></div><span class="nav-logo-text syne">SmartBudget Travel</span></div>
+      <p>Find where your money takes you. Real scraped data — Numbeo, Ryanair, Booking.com, CDC, WHO.</p>
     </div>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/3296280/pexels-photo-3296280.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Crispy battered fish with chips and mushy peas on a plate" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">Also excellent in Whitstable</div>
-        <h4>Ossie's Best Fish and Chips</h4>
-        <p><em>Sunday Times</em> mentioned and multiple Tripadvisor Travellers' Choice awards. The batter is thin and genuinely crisp — the kind that shatters rather than bends. Generous portions. A short walk from Tankerton Beach makes this the ideal eat-then-walk evening stop. The 2024 Tripadvisor Travellers' Choice Award winner.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>205 Tankerton Road, Whitstable CT5 2AT</strong><br>Tel: 01227 266600 · <a href="https://www.ossiesfishandchips.com" target="_blank" style="color:var(--ocean)">ossiesfishandchips.com</a><br>Tue–Sun 12–8pm (table bookings recommended)</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/5409013/pexels-photo-5409013.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pink painted oyster bar restaurant exterior on high street" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">Upmarket option — Whitstable's oldest restaurant</div>
-        <h4>Wheelers Oyster Bar</h4>
-        <p>Not a chippy in the traditional sense, but the fish is superb — served from behind a distinctive pink-and-blue Victorian shopfront that's been here since 1856. The kitchen now turns out lobster lasagne and scallops alongside battered fish. Just four tables inside. BYOB (no corkage). <em>The Foodie Travel Guide</em> calls it "a near mystical seafood dining experience."</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>8 High Street, Whitstable CT5 1BQ</strong><br>Tel: 01227 273311 · <a href="https://www.wheelersoysterbar.com" target="_blank" style="color:var(--ocean)">wheelersoysterbar.com</a><br>Mon–Tue 10:30am–9pm · Thu–Fri 10:15am–9:30pm · Sat 10am–10pm · Wed &amp; Sun: Closed. <strong>Bookings essential.</strong></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="aad">Advertisement — 728×90 Mid-Article</div>
-
-    <div class="apair">
-      <img src="https://images.pexels.com/photos/3296280/pexels-photo-3296280.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Perfectly battered fish and chips with sea view" loading="lazy">
-      <img src="https://images.pexels.com/photos/2765872/pexels-photo-2765872.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Whitstable harbour seafront at dusk" loading="lazy">
-    </div>
-    <p class="imgcap">Left: a proper battered cod — the benchmark. Right: Whitstable harbour on a summer evening.</p>
-
-    <h2>Broadstairs</h2>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/3581916/pexels-photo-3581916.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Viking Bay Broadstairs with seafront restaurants overlooking sandy beach" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">⭐ Michelin Guide listed — Broadstairs</div>
-        <h4>Kebbells Seafood Bar &amp; Restaurant</h4>
-        <p>Overlooking Viking Bay, Kebbells isn't doing traditional fish and chips — it's doing something better. Small and large sharing plates with a Mediterranean influence, seasonal menus built around locally sourced fish. The stone bass is the dish people come back for. Listed in the Michelin Guide and winner of the Kent Food &amp; Drink Awards Restaurant of the Year. The terrace in summer, looking down over the bay, is one of the best dining spots in Thanet. Book well ahead at weekends.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>8 Victoria Parade, Broadstairs CT10 1QS</strong><br>Tel: 01843 319002 · <a href="https://kebbells.com" target="_blank" style="color:var(--ocean)">kebbells.com</a><br>Tue–Fri 12–3pm &amp; 6–9pm · Sat–Sun 12–9pm · Mon: Closed. <strong>Reservations recommended.</strong></p>
-        </div>
-      </div>
-    </div>
-
-    <h2>Margate</h2>
-
-    <img class="afull" src="https://images.pexels.com/photos/1834403/pexels-photo-1834403.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Margate sandy beach seaside promenade on a sunny day" loading="lazy">
-    <p class="imgcap">Margate beach — Peter's Fish Factory is on The Parade, steps from the sand since 1984.</p>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/4553618/pexels-photo-4553618.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Busy seafront fish and chip shop with queue on sunny day" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">⭐ Our top pick in Margate — since 1984</div>
-        <h4>Peter's Fish Factory</h4>
-        <p>A Margate institution since 1984. On the beach, always busy, and the fish and chips are exactly what they should be: fresh, hot, unpretentious, and good value. The queue is both a warning and a recommendation. Come early or late — mid-afternoon on a summer Saturday is not the moment.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>12 The Parade, Margate CT9 1EZ</strong><br>Open daily 11am–11pm · Takeaway and eat-in available · Outdoor seating facing the beach</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/5409013/pexels-photo-5409013.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Understated bistro exterior with outdoor seating Margate" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">Michelin Green Star · For something different — Margate</div>
-        <h4>Angela's (and Dory's)</h4>
-        <p>Angela's is a Michelin Green Star-awarded small seafood restaurant — the award recognising exceptional sustainable practices. No meat on the menu. All seafood sourced from local dayboats, supply chain largely plastic-free. The daily changing menu follows what the boats bring in each morning. Its sister Dory's is a seafood bar two doors along, serving raw, pickled and baked plates, walk-ins only. Both are outstanding.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Angela's: 21 The Parade, Margate CT9 1EX</strong><br>Tel: 01843 319978 · <a href="https://angelasofmargate.com" target="_blank" style="color:var(--ocean)">angelasofmargate.com</a><br>Tue–Sat: Lunch from 12pm, Dinner from 6pm. <strong>Bookings recommended.</strong><br><strong>Dory's</strong> (wine bar/seafood): Thu–Mon 12–9pm · Walk-ins only</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="aad">Advertisement — 300×250 Inline</div>
-
-    <h2>Folkestone</h2>
-
-    <img class="afull" src="https://images.pexels.com/photos/2990650/pexels-photo-2990650.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Folkestone harbour arm at sunset with boats and seafront" loading="lazy">
-    <p class="imgcap">Folkestone Harbour — The Smokehouse is on Back Street, beside the historic Stade fishing quarter.</p>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/3296280/pexels-photo-3296280.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Upmarket fish and chips restaurant with harbour views" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">⭐ Our top pick in Folkestone — one of The Times' top 30</div>
-        <h4>The Smokehouse</h4>
-        <p>Opened by chef Mark Sargeant (a former Gordon Ramsay associate) in a 150-year-old building beside Folkestone harbour. Battered cod or haddock alongside beef dripping chips, salt and pepper squid to start, and a proper wine list. <em>The Times</em> named it one of the 30 best fish and chip shops in Britain. The five-metre glass frontage lets in the cobbled Stade and harbour views. Fish from Kent day boats.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>1–3 Back Street, Folkestone CT19 6NN</strong><br>Tel: 01303 884718 · <a href="https://www.thesmokehousefolkestone.co.uk" target="_blank" style="color:var(--ocean)">thesmokehousefolkestone.co.uk</a><br>Tue–Sun 12–4pm &amp; 5–9pm · Mon: Closed</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="ibox"><strong>A note on prices in 2026</strong><p>A standard cod and chips runs £12–£16 across these places. For best value, Peter's Fish Factory in Margate consistently delivers the most for your money. Expect to pay more at Kebbells and Angela's — but these are genuinely different experiences, not just fish and chips.</p></div>
+    <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#app">Trip planner</a><a href="#app">Budget finder</a><a href="#app">Visa checker</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a></div>
+    <div class="footer-col"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a><a href="#">Data sources</a></div>
   </div>
-
-  <div class="related"><div class="container"><div class="sh"><h2>You might also like</h2></div><div class="rgrid">
-    <article class="card" onclick="showArt('beaches')"><div class="cimg"><img src="https://images.pexels.com/photos/18003984/pexels-photo-18003984.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Botany Bay Kent" loading="lazy"><span class="ctag tb">Beaches</span></div><div class="cbody"><h3>The 7 best beaches on the Kent coast</h3><p>From Botany Bay to Sandwich Bay.</p><div class="cmeta"><span>◷ 8 min</span></div></div></article>
-    <article class="card" onclick="showArt('saxonshore')"><div class="cimg"><img src="https://images.pexels.com/photos/3651820/pexels-photo-3651820.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Coastal walk" loading="lazy"><span class="ctag tg">Walks</span></div><div class="cbody"><h3>Whitstable to Herne Bay: the perfect day's walk</h3><p>Five flat miles on the Saxon Shore Way.</p><div class="cmeta"><span>◷ 7 min</span></div></div></article>
-  </div></div></div>
-  <div class="nl"><h3>Weekly tide mail</h3><p>New guides, hidden spots, and weekend ideas every Friday.</p><div class="nlform"><input type="email" placeholder="your@email.com"><button>Subscribe</button></div></div>
-  <footer><strong>The Shoreline</strong> · England's coastal travel guide<br><span style="opacity:.4;font-size:.68rem">© 2026 The Shoreline.</span></footer>
-</div>
-
-
-<!-- ══════════ WALKS ARTICLE ══════════ -->
-<div class="page" id="page-saxonshore">
-  <div class="ahero">
-    <img src="https://images.pexels.com/photos/3651820/pexels-photo-3651820.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Beach huts stretching along shingle shore North Kent coast" loading="eager" fetchpriority="high">
-    <div class="aoverlay"></div>
-    <div class="ahcontent">
-      <div class="abread" onclick="goHome()">← The Shoreline / Walks / Kent</div>
-      <h1>Whitstable to Herne Bay: the Perfect Kent Coastal Walk</h1>
-      <div class="ahmeta"><time datetime="2026-03-15">📅 Updated March 2026</time><span>◷ 7 min read</span><span>🚶 Walks</span><span>📍 North Kent</span></div>
-    </div>
-  </div>
-
-  <div class="acontent">
-    <p>Five miles. Entirely flat. Trains at both ends. A row of the most photographed beach huts in England, two fine pubs, excellent views across the Thames Estuary, and — on a clear day — the rusting outline of the Red Sands Maunsell Sea Forts standing sentinel in the water. The walk from Whitstable to Herne Bay along the Saxon Shore Way is one of the most satisfying and accessible day walks in the south-east.</p>
-    <div class="ibox"><strong>The quick facts</strong><p><strong>Distance:</strong> 5 miles (8 km) · <strong>Terrain:</strong> Flat shingle coastal path, some pavement · <strong>Time:</strong> 2–2.5 hours walking · <strong>Start:</strong> Whitstable Harbour (train: Whitstable station, 15 min walk) · <strong>End:</strong> Herne Bay Pier (train: Herne Bay station, 10 min walk) · <strong>Dogs:</strong> Yes, welcome year-round on most of the route</p></div>
-
-    <img class="afull" src="https://images.pexels.com/photos/2765872/pexels-photo-2765872.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Whitstable harbour with fishing boats moored at low tide" loading="lazy">
-    <p class="imgcap">Start at Whitstable Harbour — arrive early for oysters or coffee at the harbour cafés before setting off east.</p>
-
-    <h2>Getting there</h2>
-    <p>The walk works best as a one-way trip by train. Southeastern services run from London Victoria or St Pancras into Whitstable (approx 1h 20min from St Pancras). Walk east to Herne Bay and catch the return train. By car, park in Herne Bay (easier and cheaper at weekends) and take the train one stop to Whitstable to start.</p>
-
-    <h2>The route</h2>
-
-    <div class="vc walk">
-      <div class="vc-body">
-        <div class="vcmeta">Stage 1 — 1.5 miles</div>
-        <h4>Whitstable Harbour to Tankerton</h4>
-        <p>The path follows shingle east from the harbour. On your right is <strong>The Street</strong> — a natural shingle ridge extending half a mile out to sea at low tide, worth walking if conditions allow. Shortly after, the famous Tankerton beach huts begin: painted in heritage colours and facing west over the estuary, best in late afternoon golden light. Tankerton Slopes — the green lawns above the beach — are perfect for picnics.</p>
-      </div>
-    </div>
-
-    <div class="apair">
-      <img src="https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Colourful beach huts in a row at Tankerton Whitstable" loading="lazy">
-      <img src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Shingle coastal path looking east estuary views" loading="lazy">
-    </div>
-    <p class="imgcap">Left: Tankerton's beach huts in the late afternoon. Right: the shingle shore looking east toward Herne Bay.</p>
-
-    <div class="vc walk">
-      <div class="vc-body">
-        <div class="vcmeta">Best food stop on the route</div>
-        <h4>JoJo's Restaurant</h4>
-        <p>The best food stop on the walk. JoJo's sits at the top of Tankerton Slopes looking over the estuary and serves a short but excellent menu of seasonal dishes — relaxed, confident cooking that Whitstable does better than anywhere. Lunch is the right meal here.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>2 Marine Parade, Tankerton, Whitstable CT5 2BE</strong><br>Book ahead at weekends — it fills up fast with walkers who know the route.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="vc walk">
-      <div class="vc-body">
-        <div class="vcmeta">Stage 2 — 1.5 miles</div>
-        <h4>Swalecliffe and Hampton Pier</h4>
-        <p>After Tankerton the path continues through Swalecliffe, crossing Swalecliffe Brook and passing <strong>Long Rock</strong> — a small nature reserve and Site of Special Scientific Interest home to sea birds and the rare Fisher's estuarine moth. Hampton Pier is a quiet fishing spot. The views east from here, with Herne Bay's Victorian skyline growing on the horizon, are among the best on the walk.</p>
-      </div>
-    </div>
-
-    <img class="afull" src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Coastal walking path with open estuary and big sky views" loading="lazy">
-    <p class="imgcap">Looking east from Hampton Pier — the Thames Estuary opens out and Herne Bay's clock tower appears ahead.</p>
-
-    <div class="vc walk">
-      <div class="vc-body">
-        <div class="vcmeta">Stage 3 — 2 miles</div>
-        <h4>Herne Bay Pier and finish</h4>
-        <p>The approach to Herne Bay is along the seafront promenade. The town's 80-foot Victorian Clock Tower — built in 1837, one of the earliest freestanding purpose-built clock towers in the UK — announces your arrival. Herne Bay Pier stretches into the estuary: the detached head visible some distance from shore is what remains after a storm destroyed the centre section. Walk to the end for a coffee and the best views back along the coast you've just walked.</p>
-      </div>
-    </div>
-
-    <h2>Where to eat and drink in Herne Bay</h2>
-
-    <div class="vc walk">
-      <div class="vc-body">
-        <div class="vcmeta">Best pub at the finish</div>
-        <h4>The Four Fathoms</h4>
-        <p>Voted Kent Life Pub of the Year. A large courtyard garden, good food, and a comfortable welcome that's exactly what a tired and windswept walker needs. Also: <strong>Beer on the Pier</strong> for a drink at the end of the pier itself before catching the train.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>The Four Fathoms: High Street, Herne Bay CT6 5LH</strong><br><strong>Beer on the Pier:</strong> Central Parade, Herne Bay CT6 5JJ</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="aad">Advertisement — 728×90 Mid-Article</div>
-
-    <h2>Extending the walk</h2>
-    <p>This stretch is part of the <strong>Saxon Shore Way</strong>, a 163-mile long-distance route from Gravesend to Hastings tracing the coastline as it existed in Roman times. Extending east from Herne Bay to Reculver — about 4 miles — is arguably more dramatic, with the twin towers of the Roman fort appearing on the horizon. From Reculver, the Thanet Coastal Path links onward toward Birchington, Margate and Broadstairs.</p>
-    <div class="ibox"><strong>Good to know</strong><p>Comfortable walking shoes are fine — boots unnecessary except in wet weather. Almost entirely flat. Dogs welcome on all but a short stretch near a holiday park at Swalecliffe.</p></div>
-  </div>
-
-  <div class="related"><div class="container"><div class="sh"><h2>You might also like</h2></div><div class="rgrid">
-    <article class="card" onclick="showArt('beaches')"><div class="cimg"><img src="https://images.pexels.com/photos/18003984/pexels-photo-18003984.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Kent beaches" loading="lazy"><span class="ctag tb">Beaches</span></div><div class="cbody"><h3>The 7 best beaches on the Kent coast</h3><p>From Botany Bay to Sandwich Bay.</p><div class="cmeta"><span>◷ 8 min</span></div></div></article>
-    <article class="card" onclick="showArt('chippy')"><div class="cimg"><img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Fish and chips" loading="lazy"><span class="ctag tr">Food &amp; Drink</span></div><div class="cbody"><h3>Best fish &amp; chip shops on the Kent coast</h3><p>From Whitstable to Folkestone.</p><div class="cmeta"><span>◷ 9 min</span></div></div></article>
-  </div></div></div>
-  <div class="nl"><h3>Weekly tide mail</h3><p>New guides, hidden spots, and weekend ideas every Friday.</p><div class="nlform"><input type="email" placeholder="your@email.com"><button>Subscribe</button></div></div>
-  <footer><strong>The Shoreline</strong> · England's coastal travel guide<br><span style="opacity:.4;font-size:.68rem">© 2026 The Shoreline.</span></footer>
-</div>
-
-
-<!-- ══════════ DOG BEACHES ARTICLE ══════════ -->
-<div class="page" id="page-dogbeaches">
-  <div class="ahero">
-    <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Dog running on a sandy beach on the Kent coast" loading="eager" fetchpriority="high">
-    <div class="aoverlay"></div>
-    <div class="ahcontent">
-      <div class="abread" onclick="goHome()">← The Shoreline / Beaches / Kent</div>
-      <h1>The Best Dog-Friendly Beaches on the Kent Coast</h1>
-      <div class="ahmeta"><time datetime="2026-03-15">📅 Updated March 2026</time><span>◷ 7 min read</span><span>🐾 Dogs</span><span>📍 Kent coast</span></div>
-    </div>
-  </div>
-
-  <div class="acontent">
-    <p>Kent is one of the best counties in England for dogs on the coast. The shingle beaches are easy on paws, the towns are broadly welcoming to four-legged visitors, and outside the summer season you can often walk for miles without meeting another soul. But seasonal restrictions apply on many of the most popular beaches — knowing the rules before you go saves disappointment.</p>
-    <div class="ibox"><strong>How dog rules work on Kent beaches</strong><p>Most Kent beaches operate restrictions between 1 May and 30 September (roughly). During this period, dogs are either banned entirely or confined to a small section. Between October and April, restrictions are lifted and most beaches are fully open. Rules vary beach by beach, and some council boundaries differ slightly — always check the local council website for the current year's rules.</p></div>
-
-    <img class="afull" src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Joyful dog sprinting along a shingle beach in autumn sunshine" loading="lazy">
-    <p class="imgcap">Autumn and winter are the finest seasons for dogs on the Kent coast — unrestricted beaches, empty sands, and low golden light.</p>
-
-    <h2>Year-round dog beaches (no seasonal restrictions)</h2>
-    <p>These are the genuinely unrestricted beaches — dogs welcome every day of the year, no seasonal bans. They are also, not coincidentally, excellent beaches in their own right.</p>
-
-    <h2>1. Stone Bay, Broadstairs</h2>
-    <p>The best year-round dog beach in Thanet, and probably in Kent. Stone Bay sits in a sheltered chalk cove just south of Broadstairs town centre — easy to reach on foot, never as busy as Viking Bay, and holding both Blue Flag and Seaside Award status. The chalk cliffs above create a windbreak effect that makes it feel warmer than surrounding beaches. The rock pools are rich and endlessly interesting to dogs with any instinct for investigation. Unlike many Thanet beaches, there are no seasonal restrictions at all — Stone Bay is open to dogs every single day of the year.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Stone Bay</div>
-        <h4>Stone Bay, Broadstairs</h4>
-        <p>Sheltered chalk cove, Blue Flag, year-round dog access — the best all-seasons dog beach in Thanet.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Stone Road, Broadstairs CT10 1EF</strong><br>
-          Small car park at the clifftop. Steps down to beach — not suitable for pushchairs. Dogs: unrestricted year-round. No ban, ever.</p>
-        </div>
-      </div>
-    </div>
-
-    <h2>2. Sandwich Bay</h2>
-    <p>One of Kent's most unusual beaches — access is via a private toll road through a golf estate (small fee per car), which naturally keeps visitor numbers low. The result is a vast, flat sweep of dunes, tidal pools, and sand that feels genuinely wild, backed by the river Stour to the north and the English Channel to the east. Dogs are welcome year-round with no restrictions whatsoever. There are no facilities (no café, no toilets, no bins — pack everything out), but the space and the birdlife more than compensate. For a dog that loves to run, Sandwich Bay is about as good as it gets on this stretch of coast.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Sandwich Bay</div>
-        <h4>Sandwich Bay, Sandwich</h4>
-        <p>Wild, private, unlimited space — dogs unrestricted year-round. No facilities, but pack a flask and it's perfect.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Sandwich Bay Road, Sandwich CT13 9PF</strong><br>
-          Toll road access (small fee). Dogs welcome year-round, no ban, no lead requirements. Bring water, bags, and everything else you need.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="aad">Advertisement — 728×90 Mid-Article (premium placement)</div>
-
-    <h2>3. Kingsdown Beach, near Deal</h2>
-    <p>A long, quiet shingle beach running south from the village of Kingsdown toward Walmer. It's one of the least visited stretches of the Kent coast — no facilities, no car park right on the beach, and no summer crowds. Dogs are welcome year-round with no restrictions. The shingle gives way to sand at low tide, and the views across the Channel to France are among the clearest on the coast. The village pub, the Zetland Arms, sits right above the beach and welcomes dogs inside as well as in the garden.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Kingsdown Beach</div>
-        <h4>Kingsdown Beach, near Deal</h4>
-        <p>Quiet, shingle, year-round dog access — and one of the best dog-friendly pubs in Kent directly above it.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Beach Road, Kingsdown, Deal CT14 8AF</strong><br>
-          Limited roadside parking in Kingsdown village. Dogs year-round, no restrictions. <strong>The Zetland Arms</strong> (pub directly above beach) is dog-friendly inside and out.</p>
-        </div>
-      </div>
-    </div>
-
-    <h2>4. Samphire Hoe, Dover</h2>
-    <p>Technically not a traditional beach — Samphire Hoe is a nature reserve built from Channel Tunnel spoil, with a flat coastal path rather than a conventional strand. But it is one of the best places on the Kent coast to walk a dog, year-round and without restriction. The reserve is fully flat, wheelchair and dog-accessible, and fenced from the cliff edge. Dogs can be let off the lead in most areas (except the reserve sections closest to the railway line). The scenery — white cliffs towering above, ferries tracking across the Channel below — is genuinely extraordinary.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">The essentials — Samphire Hoe</div>
-        <h4>Samphire Hoe Nature Reserve, Dover</h4>
-        <p>Flat, fenced, extraordinary cliff scenery — one of the finest year-round dog walks on the whole Kent coast.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Western Heights, Dover CT17 9FL</strong><br>
-          Free car park. Access via cliff tunnel off the A20. Dogs welcome year-round, off-lead in most areas. Gate locked at dusk.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="aad">Advertisement — 300×250 Inline</div>
-
-    <h2>Beaches with seasonal restrictions (but excellent in winter)</h2>
-    <p>These beaches ban or restrict dogs between roughly May and September, but are among the very best outside that window — and in winter they are outstanding.</p>
-
-    <h2>5. Botany Bay, Broadstairs (Oct–Apr only)</h2>
-    <p>Botany Bay is one of Kent's most spectacular beaches — chalk stacks, rock pools, sand. It's also one of the richest sniffing environments on the coast, with seaweed, chalk, rockpool life, and the occasional stranded cuttlebone. The restriction runs from 1 May to 30 September. Between October and April it's fully open to dogs, and a low-tide winter morning here — chalk stacks catching the frost, beach empty — is one of the finest dog walk experiences in the south-east.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">Dogs: Oct–Apr unrestricted · May–Sep banned</div>
-        <h4>Botany Bay, Broadstairs CT10 3LG</h4>
-        <p>Spectacular chalk stacks and rich rock pools — one of Kent's finest winter dog beaches.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Marine Drive, Cliftonville, Broadstairs CT10 3LG</strong><br>
-          Car park on Botany Road, 10 min cliff path to beach. Unrestricted Oct–Apr. Total ban May–Sep.</p>
-        </div>
-      </div>
-    </div>
-
-    <h2>6. Tankerton Beach, Whitstable (Oct–Apr off-lead)</h2>
-    <p>Tankerton's shingle strip is a great dog walk at any time of year — the beach is long enough that you can always find a quiet stretch, the famous beach huts give the walk a distinctly British character, and The Street (the shingle causeway that extends half a mile out to sea at low tide) is an unforgettable experience for a dog who's not alarmed by water on both sides. Dogs are banned from the main stretch in summer but welcome off-lead between October and April. In winter, the west-facing beach catches the low afternoon light magnificently.</p>
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">Dogs: Oct–Apr unrestricted · May–Sep banned (main stretch)</div>
-        <h4>Tankerton Beach, Whitstable CT5 2BE</h4>
-        <p>Beach huts, The Street at low tide, and glorious sunset walks — ideal for dogs in the off-season.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Marine Parade, Tankerton, Whitstable CT5 2BE</strong><br>
-          Parking on Marine Parade. Dogs fully off-lead Oct–Apr. Summer ban on main stretch — a small section at the far western end stays open year-round.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="ibox"><strong>Dog-friendly cafés along the coast</strong><p>Most independent cafés on the Kent coast welcome dogs, especially outside summer. Reliable options: <strong>The Neptune pub</strong>, Whitstable Harbour (dogs welcome inside and in garden); <strong>Whitstable Castle café</strong> (garden, dogs welcome); <strong>The Funky Mackerel</strong>, Deal Pier (outdoor terrace, dogs welcome); <strong>Kiosk at Walmer Beach</strong> (open year-round, outdoor seating). Always call ahead in summer as policies can change.</p></div>
-
-    <h2>What to pack for a day's beach walk with a dog</h2>
-    <p>Kent's shingle beaches are generally safe for dogs but there are a few things worth knowing: shingle can get hot in direct sun in summer (check with the back of your hand before letting a dog lie down); some beaches have groynes at low tide that can cut paws; and the tidal range is significant — always check before taking a dog near the base of chalk cliffs, where rock falls are more common than they look. A long lead is useful for beaches with livestock access restrictions nearby, and a collapsible water bowl is worth carrying from May onwards when fresh water is harder to find.</p>
-  </div>
-
-  <div class="related"><div class="container"><div class="sh"><h2>You might also like</h2></div><div class="rgrid">
-    <article class="card" onclick="showArt('beaches')"><div class="cimg"><img src="https://images.pexels.com/photos/18003984/pexels-photo-18003984.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Botany Bay Kent" loading="lazy"><span class="ctag tb">Beaches</span></div><div class="cbody"><h3>The 7 best beaches on the Kent coast</h3><p>From Botany Bay to Sandwich Bay.</p><div class="cmeta"><span>◷ 8 min</span></div></div></article>
-    <article class="card" onclick="showArt('saxonshore')"><div class="cimg"><img src="https://images.pexels.com/photos/3651820/pexels-photo-3651820.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Coastal walk" loading="lazy"><span class="ctag tg">Walks</span></div><div class="cbody"><h3>Whitstable to Herne Bay: the perfect day's walk</h3><p>Five flat miles on the Saxon Shore Way.</p><div class="cmeta"><span>◷ 7 min</span></div></div></article>
-  </div></div></div>
-  <div class="nl"><h3>Weekly tide mail</h3><p>New guides, hidden spots, and weekend ideas every Friday.</p><div class="nlform"><input type="email" placeholder="your@email.com"><button>Subscribe</button></div></div>
-  <footer><strong>The Shoreline</strong> · England's coastal travel guide<br><span style="opacity:.4;font-size:.68rem">© 2026 The Shoreline.</span></footer>
-</div>
-
-<!-- ══════════ DEAL ARTICLE ══════════ -->
-<div class="page" id="page-deal">
-  <div class="ahero">
-    <img src="https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Colourful fishing boats moored in a quiet harbour on the Kent coast" loading="eager" fetchpriority="high">
-    <div class="aoverlay"></div>
-    <div class="ahcontent">
-      <div class="abread" onclick="goHome()">← The Shoreline / Towns / Kent</div>
-      <h1>Deal: the Best Town on the Kent Coast You Haven't Visited Yet</h1>
-      <div class="ahmeta"><time datetime="2026-03-15">📅 Updated March 2026</time><span>◷ 8 min read</span><span>🏘️ Towns</span><span>📍 East Kent</span></div>
-    </div>
-  </div>
-
-  <div class="acontent">
-    <p>Deal is quietly becoming one of the most talked-about small towns on the south coast. It has everything the more famous Kent seaside towns have — Georgian architecture, a decent pier, pebble beaches, good pubs — but without the day-tripper crowds that make Whitstable difficult on a summer Saturday. It's the kind of place where you can still get a table at lunch without a booking, where the coffee shop knows your name by your second visit, and where the house prices tell you it's been discovered by people who know what they're looking for.</p>
-    <div class="ibox"><strong>Getting to Deal</strong><p>Direct trains from London St Pancras take about 1h 40min via Folkestone or Ramsgate. By car, Deal is just off the A258 between Dover and Sandwich — about 15 minutes from the M20. Parking is easy and mostly free on the residential streets west of the seafront.</p></div>
-
-    <img class="afull" src="https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Wooden fishing boats painted in bright colours on a shingle shore" loading="lazy">
-    <p class="imgcap">Deal's fishing boats are still working boats — the beach launch tradition dates back centuries.</p>
-
-    <h2>What makes Deal different</h2>
-    <p>Most Kent seaside towns pivoted hard to tourism decades ago. Deal didn't. It has a working fishing beach — boats are still launched from the shingle in the old way, and fresh fish is sold directly from the boats on the beach. The town centre is a genuine high street with independent butchers, bakers, a proper hardware shop, and a record store (Pilot). The pubs are locals' pubs that happen to welcome visitors, not visitor pubs with locals' prices.</p>
-    <p>The seafront is also unusual. There's no promenade funfair, no amusement arcades, no candyfloss stalls. What there is: a long, flat shingle beach good for walking; a Victorian pier that's one of only a handful of intact fishing piers left in England; the ruins of a Napoleonic-era military barracks at Walmer; and the extraordinary time-capsule of Deal Castle, built by Henry VIII in the shape of a Tudor rose and still one of the most intact artillery castles in England.</p>
-
-    <div class="aad">Advertisement — 728×90 Mid-Article (premium placement)</div>
-
-    <h2>Where to eat</h2>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/1269025/pexels-photo-1269025.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Craft beers and small plates on a rustic wooden bar" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">⭐ Our top pick — Deal's best restaurant</div>
-        <h4>Frog &amp; Scot</h4>
-        <p>A Franco-Scottish bistro that sounds like a joke and delivers something genuinely excellent. A short, seasonal menu built around Kent and Scottish produce — typically five or six starters, five or six mains. The cooking is confident and unfussy: moules marinière done properly, Shetland salmon, a rotating selection of local cheeses. BYO wine (minimal corkage) keeps the bill reasonable. It fills up fast and doesn't take bookings online — call or turn up early.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>86 High Street, Deal CT14 6EG</strong><br>
-          Tel: 01304 379444<br>
-          Tue–Sat: Lunch 12–2pm, Dinner 6–9pm · Sun lunch only · Mon: Closed. <strong>Bookings recommended.</strong></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pebble beach with clear sea and coastal light" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">Best seafront café</div>
-        <h4>The Strand</h4>
-        <p>Directly on the seafront, housed in a listed Georgian building with views straight out to the Goodwin Sands. The Strand does the things a good beach café should do — proper coffee, freshly made sandwiches, excellent fish finger baps — but does them better than you'd expect. The sun terrace in summer is the best outdoor seat in Deal. In winter, the interior with its original Georgian windows looking out to sea is almost better.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>The Strand, Deal CT14 7AA</strong><br>
-          Open daily from 9am. Dogs welcome on the terrace. Walk-ins only.</p>
-        </div>
-      </div>
-    </div>
-
-    <h2>Where to drink</h2>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cosy traditional pub interior with wooden beams and real ales on tap" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">Best pub — Deal</div>
-        <h4>The Ship Inn</h4>
-        <p>The best pub in Deal, possibly the best pub in East Kent. A genuine free house on the seafront — no chain ownership, no fruit machines, no background music loud enough to prevent conversation. The beer range changes constantly and leans hard toward local Kent breweries: Goacher's, Ramsgate Brewery, Old Dairy. The food is a short, honest menu that changes daily. In summer the upstairs terrace looks directly out over the English Channel toward France. In winter, the coal fire is lit and the regulars are exactly the kind of company you want in a pub on a January evening.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>141 Middle Street, Deal CT14 6JZ</strong><br>
-          Open daily from 12pm. Dogs welcome. No bookings — first come, first served.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="vc">
-      <img class="vc-img" src="https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Outdoor pub terrace overlooking sea on a summer evening" loading="lazy">
-      <div class="vc-body">
-        <div class="vcmeta">Honourable mention</div>
-        <h4>The Zetland Arms, Kingsdown</h4>
-        <p>Technically in the village of Kingsdown rather than Deal itself, but only a 25-minute clifftop walk south along the coastal path. The Zetland Arms sits directly above Kingsdown Beach with a terrace that looks straight across the water. It's a proper pub — good local ales, simple food, no pretension — and the walk there along the white-cliff path from Deal Pier is one of the finest 45-minute walks in Kent. Dogs welcome inside and out.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Wellington Parade, Kingsdown, Deal CT14 8AF</strong><br>
-          Open daily from 12pm. Dogs welcome. Terrace has direct sea views.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="aad">Advertisement — 300×250 Inline</div>
-
-    <h2>What to see and do</h2>
-
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">Historic site — Deal</div>
-        <h4>Deal Castle</h4>
-        <p>One of the finest Tudor military buildings in England, and criminally under-visited. Henry VIII built Deal Castle in 1540 as part of a chain of artillery fortresses to defend against a French invasion — the shape, seen from above, is a perfect Tudor rose. The stonework is remarkably intact, the chambers and tunnels are explorable, and the moat is still there. English Heritage manages it and entry is under £10. On a weekday outside summer you can often have the whole place almost to yourself, which makes it feel genuinely eerie in the best possible way.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Victoria Road, Deal CT14 7BA</strong><br>
-          Open Apr–Oct daily 10am–6pm · Nov–Mar Sat &amp; Sun only 10am–4pm<br>
-          Adult entry approx £9. English Heritage members free. Dogs allowed in grounds but not inside.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="vc beach">
-      <div class="vc-body">
-        <div class="vcmeta">Historic site — Walmer, 1 mile south</div>
-        <h4>Walmer Castle &amp; Gardens</h4>
-        <p>A mile south of Deal along the seafront path, Walmer Castle is Deal's quieter and in some ways more interesting counterpart. Also built by Henry VIII, it was later converted into the official residence of the Lord Warden of the Cinque Ports — a position once held by the Duke of Wellington, whose rooms and effects remain on display. The formal gardens, redesigned in the 19th century, are genuinely beautiful in spring and summer. The combined Deal–Walmer walk along the seafront and back through the town is about 4 miles and takes in the best of both places.</p>
-        <div class="vc-addr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p><strong>Kingsdown Road, Walmer, Deal CT14 7LJ</strong><br>
-          Open Apr–Oct daily 10am–6pm. Combined ticket with Deal Castle available. Gardens free to visit separately.</p>
-        </div>
-      </div>
-    </div>
-
-    <h2>Deal Pier: a proper fishing pier</h2>
-    <p>Deal Pier is one of only a handful of traditional fishing piers left in England that is still used primarily for fishing rather than entertainment. There are no amusements, no arcades, no dodgems — just a 300-metre concrete walkway extending into the Channel with a kiosk at the end selling tea and bait. In summer, the pier is lined with anglers catching bass, sole, and mackerel from the beach end and cod further out. The views back to the town from the pier head — the Georgian seafront, the castle, the shingle beach — are the best views of Deal there are.</p>
-
-    <div class="ibox"><strong>The best time to visit Deal</strong><p>September and October are exceptional — the summer visitors have gone, the weather is still reasonable, and the town relaxes back into itself. The seafood is at its best (bass season is September–November), the pubs are quieter, and the light over the Channel in early autumn is the best photographic light on the coast. If you come in summer, arrive on a weekday and before 11am to park easily.</p></div>
-
-    <img class="afull" src="https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Quiet narrow street with Georgian terraced houses in an English coastal town" loading="lazy">
-    <p class="imgcap">Deal's back streets are full of well-preserved Georgian terraces — the town was prosperous enough to build well, quiet enough that it was never knocked down and rebuilt.</p>
-
-    <h2>A day itinerary for Deal</h2>
-    <p><strong>Morning:</strong> Arrive by train, walk the seafront south to Walmer Castle (1 mile). Explore the castle and gardens, then walk back along Deal beach. Stop at The Strand for coffee and a fish finger bap looking out to the Goodwin Sands.<br><br>
-    <strong>Afternoon:</strong> Deal Castle (30–45 min). Browse the high street — Pilot Records is worth twenty minutes of any music lover's time. Walk the pier to the end and back.<br><br>
-    <strong>Evening:</strong> The Ship Inn for local ales, then Frog &amp; Scot for dinner (book ahead). Last train to London from Deal around 9.30pm — check timetable in advance.</p>
-  </div>
-
-  <div class="related"><div class="container"><div class="sh"><h2>You might also like</h2></div><div class="rgrid">
-    <article class="card" onclick="showArt('beaches')"><div class="cimg"><img src="https://images.pexels.com/photos/18003984/pexels-photo-18003984.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Botany Bay Kent" loading="lazy"><span class="ctag tb">Beaches</span></div><div class="cbody"><h3>The 7 best beaches on the Kent coast</h3><p>From Botany Bay to Sandwich Bay.</p><div class="cmeta"><span>◷ 8 min</span></div></div></article>
-    <article class="card" onclick="showArt('dogbeaches')"><div class="cimg"><img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Dog on Kent beach" loading="lazy"><span class="ctag tb">Beaches</span></div><div class="cbody"><h3>Best dog-friendly beaches on the Kent coast</h3><p>Year-round access and where to go with a dog every month.</p><div class="cmeta"><span>◷ 7 min</span></div></div></article>
-  </div></div></div>
-  <div class="nl"><h3>Weekly tide mail</h3><p>New guides, hidden spots, and weekend ideas every Friday.</p><div class="nlform"><input type="email" placeholder="your@email.com"><button>Subscribe</button></div></div>
-  <footer><strong>The Shoreline</strong> · England's coastal travel guide<br><span style="opacity:.4;font-size:.68rem">© 2026 The Shoreline.</span></footer>
-</div>
-
-<!-- ══════════ SEARCH PAGE ══════════ -->
-<div class="page" id="page-search">
-  <div class="shero">
-    <div class="shero-in">
-      <div class="abread" onclick="goHome()" style="color:#7FC8E0">← Back to guides</div>
-      <h1 id="st"></h1>
-      <p id="ss"></p>
-    </div>
-  </div>
-  <div class="container" style="padding-top:2.2rem;padding-bottom:3rem">
-    <div id="sp" class="cgrid" style="margin-bottom:2.2rem"></div>
-    <div id="snw"><div class="sh"><h2 id="snt">Nearby destinations</h2></div><div id="sn" class="cgrid"></div></div>
-  </div>
-  <div class="nl"><h3>Weekly tide mail</h3><p>New guides every Friday.</p><div class="nlform"><input type="email" placeholder="your@email.com"><button>Subscribe</button></div></div>
-  <footer><strong>The Shoreline</strong> · England's coastal travel guide<br><span style="opacity:.4;font-size:.68rem">© 2026 The Shoreline.</span></footer>
-</div>
-
+  <div class="footer-bottom"><span>© 2025 SmartBudget Travel.</span><span>Data: Numbeo · Amadeus · Booking.com · CDC · WHO · REST Countries</span></div>
+</footer>
 
 <script>
-/* ── GEO DB ── */
-const LOCS=[
-  {name:"Whitstable",county:"Kent",type:"town",lat:51.361,lng:1.026,
-   desc:"Famous for oysters, beach huts, and an independent harbour town spirit. Tankerton's beach huts and The Street at low tide are unmissable.",
-   img:"https://images.pexels.com/photos/2765872/pexels-photo-2765872.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT5"],highlights:["Whitstable Harbour","Tankerton Beach Huts","The Street at Low Tide","Oyster Festival","JoJo's Restaurant"],article:"saxonshore"},
-  {name:"Herne Bay",county:"Kent",type:"town",lat:51.372,lng:1.128,
-   desc:"Victorian seaside town with colourful beach huts, a pier with its head detached by a storm, and Reculver Roman fort 4 miles east.",
-   img:"https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT6"],highlights:["Herne Bay Pier","Reculver Roman Fort","Victorian Clock Tower","Four Fathoms Pub"],article:"saxonshore"},
-  {name:"Broadstairs",county:"Kent",type:"town",lat:51.359,lng:1.437,
-   desc:"Quintessential British seaside with Viking Bay's golden sand, Botany Bay's chalk stacks, and a Charles Dickens connection.",
-   img:"https://images.pexels.com/photos/3581916/pexels-photo-3581916.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT10"],highlights:["Viking Bay","Botany Bay","Kingsgate Bay","Kebbells Seafood Bar","Dickens House Museum"],article:"beaches"},
-  {name:"Margate",county:"Kent",type:"town",lat:51.385,lng:1.386,
-   desc:"Resurgent seaside town where traditional charm meets the Turner Contemporary gallery and Dreamland amusement park.",
-   img:"https://images.pexels.com/photos/1834403/pexels-photo-1834403.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT9"],highlights:["Turner Contemporary Gallery","Margate Main Sands","Dreamland","Shell Grotto","Peter's Fish Factory"],article:"chippy"},
-  {name:"Ramsgate",county:"Kent",type:"town",lat:51.336,lng:1.416,
-   desc:"Georgian architecture, a Royal Harbour, sandy beaches and a lively marina restaurant scene.",
-   img:"https://images.pexels.com/photos/3581916/pexels-photo-3581916.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT11","CT12"],highlights:["Royal Harbour Marina","Ramsgate Sands","East Pier Brasserie"],article:"beaches"},
-  {name:"Dover",county:"Kent",type:"town",lat:51.126,lng:1.313,
-   desc:"The gateway to England — White Cliffs, a medieval castle with tunnel network, and Samphire Hoe at the base of the cliffs.",
-   img:"https://images.pexels.com/photos/1004409/pexels-photo-1004409.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT16","CT17"],highlights:["White Cliffs of Dover","Dover Castle","Samphire Hoe","South Foreland Lighthouse"],article:"beaches"},
-  {name:"Folkestone",county:"Kent",type:"town",lat:51.082,lng:1.167,
-   desc:"A revitalised harbour arm packed with independent food and drink, a creative quarter, and gateway to the Kent Downs AONB.",
-   img:"https://images.pexels.com/photos/2990650/pexels-photo-2990650.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT18","CT19","CT20"],highlights:["Folkestone Harbour Arm","The Smokehouse","Sunny Sands","England Coast Path"],article:"chippy"},
-  {name:"Deal",county:"Kent",type:"town",lat:51.222,lng:1.401,
-   desc:"A quaint fishing town with an Elizabethan castle, pebble beaches, excellent coffee shops, and a record store.",
-   img:"https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT14"],highlights:["Deal Castle","Deal Pier","Kingsdown Beach","Walmer Castle"],article:"deal"},
-  {name:"Sandwich",county:"Kent",type:"town",lat:51.274,lng:1.338,
-   desc:"A perfectly preserved medieval town with Sandwich Bay — one of Kent's finest beaches for birdlife and solitude.",
-   img:"https://images.pexels.com/photos/18003984/pexels-photo-18003984.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT13"],highlights:["Sandwich Bay","Barbican Gate","Medieval town walls"],article:"beaches"},
-  {name:"Hythe",county:"Kent",type:"town",lat:51.072,lng:1.086,
-   desc:"Romney Marsh town with a shingle beach, the famous miniature steam railway, and a church crypt stacked with over 2,000 ancient skulls.",
-   img:"https://images.pexels.com/photos/3651820/pexels-photo-3651820.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT21"],highlights:["Romney Hythe & Dymchurch Railway","St Leonard's Crypt","Saltwood Castle"],article:"saxonshore"},
-  {name:"Botany Bay Beach",county:"Kent",type:"beach",lat:51.391,lng:1.436,
-   desc:"Dramatic chalk stacks, rich rock pools and a sandy cove near Broadstairs — one of Kent's most photogenic beaches.",
-   img:"https://images.pexels.com/photos/18003984/pexels-photo-18003984.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT10"],highlights:["Chalk stacks","Rock pools","Fossil hunting","Cliff walks"],article:"beaches"},
-  {name:"Tankerton Beach",county:"Kent",type:"beach",lat:51.369,lng:1.063,
-   desc:"The beach hut strip east of Whitstable. Famous for sunsets and The Street — a shingle causeway that appears at low tide.",
-   img:"https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT5"],highlights:["Tankerton beach huts","The Street at low tide","Maunsell Sea Forts views"],article:"saxonshore"},
-  {name:"Kingsgate Bay",county:"Kent",type:"beach",lat:51.381,lng:1.441,
-   desc:"A sheltered chalk cove with sea caves and a natural arch — quieter than Viking Bay and beautiful year-round.",
-   img:"https://images.pexels.com/photos/4254555/pexels-photo-4254555.jpeg?auto=compress&cs=tinysrgb&w=500",
-   postcodes:["CT10"],highlights:["Sea caves and arch","Chalk cliffs","Joss Bay surf school nearby"],article:"beaches"},
-];
-const PC={
-  "CT1":{lat:51.280,lng:1.080,town:"Canterbury"},
-  "CT2":{lat:51.293,lng:1.065,town:"Canterbury"},
-  "CT3":{lat:51.268,lng:1.160,town:"Littlebourne"},
-  "CT4":{lat:51.210,lng:1.030,town:"Bridge / Canterbury"},
-  "CT5":{lat:51.362,lng:1.026,town:"Whitstable"},
-  "CT6":{lat:51.373,lng:1.130,town:"Herne Bay"},
-  "CT7":{lat:51.372,lng:1.290,town:"Birchington"},
-  "CT8":{lat:51.381,lng:1.330,town:"Westgate-on-Sea"},
-  "CT9":{lat:51.385,lng:1.386,town:"Margate"},
-  "CT10":{lat:51.360,lng:1.437,town:"Broadstairs"},
-  "CT11":{lat:51.336,lng:1.416,town:"Ramsgate"},
-  "CT12":{lat:51.340,lng:1.370,town:"Ramsgate / Manston"},
-  "CT13":{lat:51.274,lng:1.338,town:"Sandwich"},
-  "CT14":{lat:51.222,lng:1.401,town:"Deal"},
-  "CT15":{lat:51.161,lng:1.260,town:"St Margarets at Cliffe"},
-  "CT16":{lat:51.130,lng:1.303,town:"Dover"},
-  "CT17":{lat:51.126,lng:1.313,town:"Dover"},
-  "CT18":{lat:51.098,lng:1.177,town:"Folkestone"},
-  "CT19":{lat:51.085,lng:1.175,town:"Folkestone"},
-  "CT20":{lat:51.082,lng:1.167,town:"Folkestone"},
-  "CT21":{lat:51.072,lng:1.086,town:"Hythe"},
-  "ME1":{lat:51.390,lng:0.505,town:"Rochester"},
-  "ME12":{lat:51.431,lng:0.752,town:"Sheerness"},
-  "ME13":{lat:51.315,lng:0.893,town:"Faversham"},
-  "TN28":{lat:50.976,lng:0.972,town:"New Romney"},
-  "TN29":{lat:50.986,lng:0.883,town:"Lydd / Dungeness"},
+/* ────────────────────────────────────────────────────────
+   CONFIG — change API_BASE to your backend URL
+   ──────────────────────────────────────────────────────── */
+const API_BASE = 'http://localhost:8000';
+let appStyle = 'budget';
+let apiOnline = false;
+let currentDest = null;
+let currentSubTab = 'overview';
+
+/* ── STATIC FALLBACK (mirrors backend baseline data) ── */
+const FALLBACK = {
+  "Budapest, Hungary":  {flag:"🇭🇺",code:"BUD",cc:"HU",desc:"Thermal baths, stunning architecture",fl:[{airline:"Ryanair",price:48,stops:0,times:"06:45 → 10:05"},{airline:"Wizz Air",price:62,stops:0,times:"09:20 → 12:40"},{airline:"British Airways",price:94,stops:0,times:"13:00 → 16:20"}],ht:[{name:"City Hostel Budapest",area:"District VII",stars:2,score:4.2,ppn:22},{name:"Adina Apartment Hotel",area:"Downtown",stars:3,score:4.5,ppn:68},{name:"Kempinski Corvinus",area:"City Centre",stars:5,score:4.8,ppn:210}],col:{food_budget:18,food_normal:28,food_luxury:65,transport_budget:4,transport_normal:6,transport_luxury:18,activities_budget:12,activities_normal:18,activities_luxury:45,misc_budget:6,misc_normal:10,misc_luxury:22},visa:{visa_type:"visa_free",visa_label:"Visa-free (Schengen)",max_stay_days:90,passport_validity_months:3,fee_usd:0,notes:"90 days in any 180-day period. No entry card required."},vax:[{vaccine_name:"Routine vaccinations",requirement_level:"recommended"},{vaccine_name:"Hepatitis A",requirement_level:"recommended"}],local:{currency:"HUF (Forint) · £1 ≈ 470 HUF",plug:"Type F (Schuko, 2-pin round)",transport:"Metro M1–M4, trams, buses",tipping:"10–15% at restaurants",safety:"Very safe",driving_licence:"UK licence valid, drive on right"}},
+  "Krakow, Poland":     {flag:"🇵🇱",code:"KRK",cc:"PL",desc:"Medieval old town, great food & nightlife",fl:[{airline:"Ryanair",price:38,stops:0,times:"07:00 → 10:15"},{airline:"Wizz Air",price:52,stops:0,times:"10:30 → 13:45"},{airline:"LOT Polish Airlines",price:85,stops:0,times:"14:00 → 17:20"}],ht:[{name:"Greg & Tom Hostel",area:"Old Town",stars:2,score:4.3,ppn:18},{name:"Hotel Copernicus",area:"Royal Road",stars:3,score:4.4,ppn:58},{name:"Copernicus Boutique",area:"Old Town",stars:4,score:4.7,ppn:165}],col:{food_budget:15,food_normal:24,food_luxury:55,transport_budget:3,transport_normal:5,transport_luxury:14,activities_budget:10,activities_normal:15,activities_luxury:38,misc_budget:5,misc_normal:8,misc_luxury:18},visa:{visa_type:"visa_free",visa_label:"Visa-free (Schengen)",max_stay_days:90,passport_validity_months:3,fee_usd:0,notes:"90 days in any 180-day period."},vax:[{vaccine_name:"Routine vaccinations",requirement_level:"recommended"},{vaccine_name:"Tick-borne encephalitis",requirement_level:"consider"}],local:{currency:"PLN (Złoty) · £1 ≈ 5 PLN",plug:"Type F (Schuko)",transport:"Tram, bus, minibus",tipping:"10%, round up taxis",safety:"Very safe",driving_licence:"UK licence valid"}},
+  "Lisbon, Portugal":   {flag:"🇵🇹",code:"LIS",cc:"PT",desc:"Pastel de nata, trams, Atlantic sunsets",fl:[{airline:"TAP Air Portugal",price:72,stops:0,times:"06:50 → 10:05"},{airline:"easyJet",price:88,stops:0,times:"09:30 → 12:45"},{airline:"British Airways",price:124,stops:0,times:"11:00 → 14:20"}],ht:[{name:"Lisbon Lounge Hostel",area:"Baixa",stars:2,score:4.5,ppn:28},{name:"Hotel Miradouro",area:"Alfama",stars:3,score:4.4,ppn:82},{name:"Bairro Alto Hotel",area:"Chiado",stars:5,score:4.9,ppn:280}],col:{food_budget:22,food_normal:34,food_luxury:75,transport_budget:5,transport_normal:8,transport_luxury:22,activities_budget:14,activities_normal:22,activities_luxury:55,misc_budget:7,misc_normal:12,misc_luxury:28},visa:{visa_type:"visa_free",visa_label:"Visa-free (Schengen)",max_stay_days:90,passport_validity_months:3,fee_usd:0,notes:"90 days in any 180-day period."},vax:[{vaccine_name:"Routine vaccinations",requirement_level:"recommended"}],local:{currency:"EUR (Euro) · £1 ≈ €1.17",plug:"Type F (Schuko)",transport:"Metro, Tram 28, buses",tipping:"5–10% at restaurants",safety:"Very safe",driving_licence:"UK licence valid"}},
+  "Prague, Czechia":    {flag:"🇨🇿",code:"PRG",cc:"CZ",desc:"Fairy-tale old town, world's best beer",fl:[{airline:"Ryanair",price:44,stops:0,times:"07:30 → 10:30"},{airline:"easyJet",price:58,stops:0,times:"11:00 → 14:00"},{airline:"Czech Airlines",price:110,stops:0,times:"08:00 → 11:00"}],ht:[{name:"Czech Inn Hostel",area:"Žižkov",stars:2,score:4.1,ppn:20},{name:"Hotel Maximilian",area:"Old Town",stars:4,score:4.6,ppn:95},{name:"Four Seasons Prague",area:"Staré Město",stars:5,score:4.9,ppn:320}],col:{food_budget:16,food_normal:26,food_luxury:60,transport_budget:3,transport_normal:5,transport_luxury:16,activities_budget:10,activities_normal:16,activities_luxury:40,misc_budget:5,misc_normal:9,misc_luxury:20},visa:{visa_type:"visa_free",visa_label:"Visa-free (Schengen)",max_stay_days:90,passport_validity_months:3,fee_usd:0,notes:"90 days in any 180-day period."},vax:[{vaccine_name:"Routine vaccinations",requirement_level:"recommended"},{vaccine_name:"Hepatitis A",requirement_level:"consider"}],local:{currency:"CZK (Koruna) · £1 ≈ 30 CZK",plug:"Type E (Schuko variant)",transport:"Metro A/B/C, trams, night trams",tipping:"10% at restaurants",safety:"Very safe",driving_licence:"UK licence valid"}},
+  "Bangkok, Thailand":  {flag:"🇹🇭",code:"BKK",cc:"TH",desc:"Temples, unbeatable street food",fl:[{airline:"Qatar Airways",price:380,stops:1,times:"08:00 → 05:45+1"},{airline:"Emirates",price:395,stops:1,times:"14:00 → 10:30+1"},{airline:"Thai Airways",price:420,stops:0,times:"21:30 → 13:50+1"}],ht:[{name:"Lub d Bangkok",area:"Silom",stars:2,score:4.3,ppn:18},{name:"Novotel Bangkok Sukhumvit",area:"Sukhumvit",stars:4,score:4.5,ppn:62},{name:"Mandarin Oriental",area:"Riverside",stars:5,score:4.9,ppn:380}],col:{food_budget:12,food_normal:22,food_luxury:65,transport_budget:4,transport_normal:8,transport_luxury:25,activities_budget:14,activities_normal:24,activities_luxury:80,misc_budget:6,misc_normal:10,misc_luxury:30},visa:{visa_type:"visa_free",visa_label:"Visa exemption (30 days)",max_stay_days:30,passport_validity_months:6,fee_usd:0,notes:"Arrival card (TM6) required — fill in on the plane. Extendable 30 days at immigration."},vax:[{vaccine_name:"Hepatitis A",requirement_level:"recommended"},{vaccine_name:"Typhoid",requirement_level:"recommended"},{vaccine_name:"Japanese Encephalitis",requirement_level:"consider"},{vaccine_name:"Rabies",requirement_level:"consider"}],local:{currency:"THB (Baht) · £1 ≈ 45 THB",plug:"Type A/B/C — bring adapter",transport:"BTS Skytrain, MRT, river boats, Grab",tipping:"20–40 THB at restaurants",safety:"Exercise normal caution",driving_licence:"International permit required"}},
+  "Tokyo, Japan":       {flag:"🇯🇵",code:"NRT",cc:"JP",desc:"Ultra-modern meets ancient tradition",fl:[{airline:"Finnair",price:468,stops:1,times:"08:00 → 07:40+1"},{airline:"ANA",price:520,stops:0,times:"13:00 → 09:30+1"},{airline:"Japan Airlines",price:548,stops:0,times:"10:00 → 06:30+1"}],ht:[{name:"Khaosan Tokyo Ninja",area:"Asakusa",stars:2,score:4.2,ppn:32},{name:"Hotel Gracery Shinjuku",area:"Shinjuku",stars:3,score:4.6,ppn:88},{name:"Park Hyatt Tokyo",area:"Nishi-Shinjuku",stars:5,score:4.9,ppn:420}],col:{food_budget:22,food_normal:38,food_luxury:90,transport_budget:8,transport_normal:12,transport_luxury:30,activities_budget:16,activities_normal:28,activities_luxury:80,misc_budget:8,misc_normal:14,misc_luxury:35},visa:{visa_type:"visa_free",visa_label:"Visa-free (90 days)",max_stay_days:90,passport_validity_months:6,fee_usd:0,notes:"Entry card required on the aircraft. No visa for UK passport holders."},vax:[{vaccine_name:"Routine vaccinations",requirement_level:"recommended"},{vaccine_name:"Japanese Encephalitis",requirement_level:"consider"}],local:{currency:"JPY (Yen) · £1 ≈ 190 JPY",plug:"Type A (flat 2-pin) — bring adapter",transport:"Subway (Suica card), JR Rail, buses",tipping:"DO NOT tip — considered rude",safety:"Extremely safe",driving_licence:"International permit required, drive on left"}},
+  "New York, USA":      {flag:"🇺🇸",code:"JFK",cc:"US",desc:"The city that never sleeps",fl:[{airline:"Virgin Atlantic",price:318,stops:0,times:"11:00 → 13:50"},{airline:"British Airways",price:348,stops:0,times:"09:30 → 12:15"},{airline:"American Airlines",price:375,stops:0,times:"15:00 → 17:55"}],ht:[{name:"HI New York City Hostel",area:"Upper West Side",stars:2,score:4.0,ppn:55},{name:"The Row NYC",area:"Midtown",stars:4,score:4.3,ppn:145},{name:"The Plaza Hotel",area:"Fifth Avenue",stars:5,score:4.8,ppn:650}],col:{food_budget:35,food_normal:55,food_luxury:120,transport_budget:10,transport_normal:15,transport_luxury:45,activities_budget:22,activities_normal:35,activities_luxury:90,misc_budget:12,misc_normal:18,misc_luxury:40},visa:{visa_type:"esta",visa_label:"ESTA required",max_stay_days:90,passport_validity_months:6,fee_usd:21,notes:"Apply at esta.cbp.dhs.gov before travel. $21 fee. Valid 2 years."},vax:[{vaccine_name:"Routine vaccinations",requirement_level:"recommended"}],local:{currency:"USD (Dollar) · £1 ≈ $1.27",plug:"Type A/B (flat pin) — bring adapter",transport:"Subway (24/7), buses, Yellow Cabs, Uber",tipping:"18–20% expected at restaurants",safety:"Varies by neighbourhood",driving_licence:"UK licence valid for tourism"}},
+  "Bali, Indonesia":    {flag:"🇮🇩",code:"DPS",cc:"ID",desc:"Rice terraces, temples, surf and yoga",fl:[{airline:"Singapore Airlines",price:420,stops:1,times:"10:30 → 07:15+1"},{airline:"Cathay Pacific",price:445,stops:1,times:"11:45 → 10:30+1"},{airline:"Qatar Airways",price:470,stops:1,times:"07:00 → 06:30+1"}],ht:[{name:"Puri Garden Hotel",area:"Kuta",stars:2,score:4.1,ppn:20},{name:"Alaya Resort Ubud",area:"Ubud",stars:4,score:4.7,ppn:85},{name:"COMO Shambhala Estate",area:"Ubud",stars:5,score:4.9,ppn:450}],col:{food_budget:14,food_normal:26,food_luxury:70,transport_budget:5,transport_normal:10,transport_luxury:30,activities_budget:16,activities_normal:28,activities_luxury:80,misc_budget:7,misc_normal:12,misc_luxury:30},visa:{visa_type:"on_arrival",visa_label:"Visa on arrival (30 days)",max_stay_days:30,passport_validity_months:6,fee_usd:35,notes:"$35 USD fee at airport. Extendable once for 30 more days."},vax:[{vaccine_name:"Hepatitis A & B",requirement_level:"recommended"},{vaccine_name:"Typhoid",requirement_level:"recommended"},{vaccine_name:"Rabies",requirement_level:"recommended"},{vaccine_name:"Japanese Encephalitis",requirement_level:"consider"}],local:{currency:"IDR (Rupiah) · £1 ≈ 20,000 IDR",plug:"Type C/F (Schuko)",transport:"Scooter rental, Grab app, private drivers",tipping:"10–15% at restaurants",safety:"Exercise normal caution",driving_licence:"International permit + local licence for scooters"}},
 };
-function dk(a,b,c,d){const R=6371,dL=(c-a)*Math.PI/180,dN=(d-b)*Math.PI/180;const x=Math.sin(dL/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dN/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));}
-function dl(k){return k<1?Math.round(k*1000)+'m':k<10?(Math.round(k*10)/10)+' km':Math.round(k)+' km'}
 
-/* ── TIDES ── */
-function buildTides(){
-  const now=new Date(),base=new Date(now);base.setMinutes(0,0,0);
-  const OFF=3.2,CYC=12.42,tides=[];
-  for(let i=-1;i<4;i++){
-    const h=new Date(base);h.setMinutes(Math.round((OFF+i*CYC)*60)%60);h.setHours(base.getHours()+Math.floor((OFF+i*CYC)));
-    const l=new Date(h);l.setTime(h.getTime()+(CYC/2)*3600000);
-    tides.push({t:h,type:'High',ht:(4.2+Math.random()*.4).toFixed(1)+'m'});
-    tides.push({t:l,type:'Low',ht:(.6+Math.random()*.3).toFixed(1)+'m'});
+/* ── API HEALTH CHECK ── */
+async function checkAPI() {
+  try {
+    const r = await fetch(`${API_BASE}/api/health`, {signal: AbortSignal.timeout(3000)});
+    if (r.ok) {
+      apiOnline = true;
+      document.getElementById('api-dot').className = 'api-dot live';
+      document.getElementById('api-status-text').textContent = '● API online — live data enabled';
+      document.getElementById('api-url-display').textContent = API_BASE.replace('http://','');
+      return;
+    }
+  } catch {}
+  apiOnline = false;
+  document.getElementById('api-dot').className = 'api-dot';
+  document.getElementById('api-status-text').textContent = 'API offline — using built-in baseline data (start backend to enable live scraping)';
+}
+
+/* ── STYLE HELPERS ── */
+function setPillStyle(btn, s) {
+  appStyle = s;
+  btn.closest('.style-pills').querySelectorAll('.style-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+}
+function setStyBtn(btn, s) {
+  appStyle = s;
+  btn.closest('.sty-btns').querySelectorAll('.sty-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function switchHeroTab(btn, tab) {
+  btn.closest('.widget-tabs').querySelectorAll('.widget-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('hp-plan').style.display = tab==='plan' ? '' : 'none';
+  document.getElementById('hp-find').style.display = tab==='find' ? '' : 'none';
+}
+function switchAppTab(tab, btn) {
+  ['search','budget','visa'].forEach(t => document.getElementById('tab-'+t).style.display = t===tab ? '' : 'none');
+  document.querySelectorAll('.app-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  else document.querySelectorAll('.app-tab')[['search','budget','visa'].indexOf(tab)].classList.add('active');
+}
+
+/* ── HERO QUICK SEARCH ── */
+function heroSearch() {
+  const dest = document.getElementById('hw-dest').value;
+  document.getElementById('s-dest').value = dest;
+  document.getElementById('s-dep').value = document.getElementById('hw-dep').value;
+  document.getElementById('s-ret').value = document.getElementById('hw-ret').value;
+  document.getElementById('app').scrollIntoView({behavior:'smooth'});
+  setTimeout(doSearch, 600);
+}
+function heroFind() {
+  document.getElementById('b-budget').value = document.getElementById('hw-budget').value;
+  document.getElementById('b-nights').value = document.getElementById('hw-nights').value;
+  switchAppTab('budget');
+  document.getElementById('app').scrollIntoView({behavior:'smooth'});
+  setTimeout(doBudgetFind, 600);
+}
+
+/* ── MAIN SEARCH ── */
+async function doSearch() {
+  const dest = document.getElementById('s-dest').value;
+  const origin = document.getElementById('s-origin').value;
+  const dep = document.getElementById('s-dep').value;
+  const ret = document.getElementById('s-ret').value;
+  const pax = parseInt(document.getElementById('s-pax').value) || 1;
+  const passport = document.getElementById('s-passport').value;
+  const errEl = document.getElementById('search-error');
+  errEl.style.display = 'none';
+
+  const loadEl = document.getElementById('search-loading');
+  const resEl = document.getElementById('search-results');
+  loadEl.style.display = 'flex';
+  resEl.innerHTML = '';
+
+  const msgs = ['Searching flights...','Comparing hotel prices...','Loading cost-of-living data...','Checking visa requirements...','Building your budget...'];
+  let mi = 0;
+  const iv = setInterval(() => { document.getElementById('search-loading-msg').textContent = msgs[Math.min(mi++, msgs.length-1)]; }, 700);
+
+  try {
+    let data;
+    if (apiOnline) {
+      const r = await fetch(`${API_BASE}/api/search/trips`, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({origin, destination: dest, depart_date: dep, return_date: ret, adults: pax, passport_country: passport, travel_style: appStyle}),
+      });
+      if (!r.ok) throw new Error(await r.text());
+      data = await r.json();
+    } else {
+      await new Promise(r => setTimeout(r, 2400));
+      data = buildFallbackSearchData(dest, origin, dep, ret, pax, passport);
+    }
+    clearInterval(iv);
+    loadEl.style.display = 'none';
+    renderSearchResults(data, dest, pax);
+  } catch (e) {
+    clearInterval(iv);
+    loadEl.style.display = 'none';
+    // Graceful fallback
+    const data = buildFallbackSearchData(dest, origin, dep, ret, pax, passport);
+    renderSearchResults(data, dest, pax);
   }
-  const up=tides.filter(t=>t.t>=now).sort((a,b)=>a.t-b.t).slice(0,4);
-  document.getElementById('tiderows').innerHTML=up.map(t=>{
-    const hh=String(t.t.getHours()).padStart(2,'0'),mm=String(t.t.getMinutes()).padStart(2,'0');
-    return`<div class="tide-row"><span class="tide-time">${hh}:${mm}</span><span style="color:${t.type==='High'?'#7FC8E0':'#8BA8B5'};font-weight:700">${t.type==='High'?'▲':'▽'} ${t.type}</span><span class="tide-ht">${t.ht}</span></div>`;
-  }).join('');
 }
-buildTides();
 
-/* ── SEARCH ── */
-let _a=[];
-function handleSearch(q,sub){
-  q=q.trim();if(!q){cDrop();return}
-  const lq=q.toLowerCase(),pcM=q.toUpperCase().match(/^([A-Z]{1,2}\d{1,2})/),pc=pcM?pcM[1]:null;
-  if(sub){cDrop();if(pc&&PC[pc])runPC(pc);else runTxt(lq);return}
-  let rows=[];
-  if(pc)Object.keys(PC).filter(k=>k.startsWith(pc)).slice(0,4).forEach(k=>{const p=PC[k];rows.push({name:k+' — '+p.town,sub:'Postcode · Kent &amp; SE coast',img:'',fn:()=>runPC(k)});});
-  LOCS.filter(l=>l.name.toLowerCase().includes(lq)||(l.postcodes||[]).some(p=>p.toLowerCase().startsWith(lq))||(l.highlights||[]).some(h=>h.toLowerCase().includes(lq))).slice(0,5).forEach(l=>{if(!rows.some(r=>r.name===l.name))rows.push({name:l.name,sub:(l.type==='beach'?'Beach':'Town')+' · '+l.county,img:l.img,fn:()=>runLoc(l)});});
-  if(!rows.length){cDrop();return}
-  _a=rows.map(r=>r.fn);
-  const drop=document.getElementById('sdrop');
-  drop.innerHTML='<div class="dhdr">Suggested locations</div>'+rows.map((r,i)=>`<div class="ditem" onclick="_a[${i}]();cDrop();">${r.img?`<img class="dimg" src="${r.img}" alt="" loading="lazy">`:'<div class="dimg" style="background:#e8e0d4;display:flex;align-items:center;justify-content:center">📍</div>'}<div><div class="dname">${r.name}</div><div class="dsub">${r.sub}</div></div><span class="darr">→</span></div>`).join('');
-  drop.classList.add('open');
+function buildFallbackSearchData(dest, origin, dep, ret, pax, passport) {
+  const fb = FALLBACK[dest];
+  if (!fb) return null;
+  const d1 = new Date(dep), d2 = new Date(ret);
+  const nights = Math.max(1, Math.round((d2-d1)/(86400000)));
+  const col = fb.col;
+  const sty = appStyle;
+  const daily = (col[`food_${sty}`]||col.food_budget) + (col[`transport_${sty}`]||col.transport_budget) + (col[`activities_${sty}`]||col.activities_budget) + (col[`misc_${sty}`]||col.misc_budget);
+  const hIdx = {budget:0,normal:1,luxury:2}[sty]||0;
+  const hotel = fb.ht[Math.min(hIdx, fb.ht.length-1)];
+  const trip_cards = fb.fl.map(fl => {
+    const ft = fl.price * pax;
+    const ht2 = hotel.ppn * nights;
+    const lt = daily * nights;
+    return {
+      flight: {airline:fl.airline, price_gbp:fl.price, total_price_gbp:ft, stops:fl.stops, display_depart:fl.times.split('→')[0].trim(), display_arrive:fl.times.split('→')[1]?.trim()||'', source:'baseline'},
+      hotel: {name:hotel.name, area:hotel.area, star_rating:hotel.stars, review_score:hotel.score, price_per_night_gbp:hotel.ppn},
+      nights,
+      daily_budget: {food:col[`food_${sty}`]||0, transport:col[`transport_${sty}`]||0, activities:col[`activities_${sty}`]||0, misc:col[`misc_${sty}`]||0, total:daily},
+      cost_summary: {flight_total:ft, hotel_total:ht2, local_total:lt, grand_total:Math.round(ft+ht2+lt), per_person:Math.round((ft+ht2+lt)/pax)},
+    };
+  });
+  return {destination:dest, nights, adults:pax, travel_style:appStyle, trip_cards, all_flights:fb.fl.map(f=>({...f,total_price_gbp:f.price*pax,display_depart:f.times.split('→')[0]?.trim(),display_arrive:f.times.split('→')[1]?.trim()||''})), all_hotels:fb.ht.map(h=>({...h,price_per_night_gbp:h.ppn})), cost_of_living:col, visa:fb.visa, vaccinations:fb.vax, country_info:fb.local};
 }
-function cDrop(){document.getElementById('sdrop').classList.remove('open')}
-document.addEventListener('click',e=>{if(!e.target.closest('.sw'))cDrop()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')cDrop()});
-function qpc(){const v=document.getElementById('pcquick').value.trim().toUpperCase(),pc=v.match(/^([A-Z]{1,2}\d{1,2})/)?.[1];if(pc&&PC[pc])runPC(pc);else alert('Try CT5 for Whitstable, CT9 for Margate, CT20 for Folkestone.');}
-function runPC(pc){
-  const c=PC[pc],sorted=LOCS.map(l=>({...l,dist:dk(c.lat,c.lng,l.lat,l.lng)})).sort((a,b)=>a.dist-b.dist),near=sorted.filter(l=>l.dist<=40).slice(0,9);
-  showPage('search');
-  document.getElementById('st').textContent='Results near '+pc+' ('+c.town+')';
-  document.getElementById('ss').textContent='Showing towns, beaches and attractions within 40 km of '+pc+'. Click any destination to read our full guide.';
-  document.getElementById('snt').textContent='All nearby destinations';
-  rGrid('sp',near.slice(0,3),true);
-  const rest=near.slice(3);document.getElementById('snw').style.display=rest.length?'block':'none';rGrid('sn',rest,true);
-}
-function runTxt(q){
-  const m=LOCS.filter(l=>l.name.toLowerCase().includes(q)||l.desc.toLowerCase().includes(q)||(l.highlights||[]).some(h=>h.toLowerCase().includes(q))||(l.postcodes||[]).some(p=>p.toLowerCase().includes(q)));
-  showPage('search');
-  if(!m.length){document.getElementById('st').textContent='No results for "'+q+'"';document.getElementById('ss').textContent='Try a town name like Whitstable, a postcode like CT5, or a beach like Botany Bay.';document.getElementById('sp').innerHTML='<div class="empty"><h3>Nothing found</h3><p>Try searching for a Kent town, postcode, or beach name.</p></div>';document.getElementById('snw').style.display='none';return;}
-  const a=m.find(l=>l.name.toLowerCase()===q)||m[0];
-  document.getElementById('st').textContent='Guide to '+a.name;
-  document.getElementById('ss').textContent=a.desc;
-  rGrid('sp',[a],false);
-  const near=LOCS.filter(l=>l.name!==a.name).map(l=>({...l,dist:dk(a.lat,a.lng,l.lat,l.lng)})).sort((a,b)=>a.dist-b.dist).slice(0,6);
-  document.getElementById('snt').textContent='Nearby to '+a.name;
-  document.getElementById('snw').style.display='block';
-  rGrid('sn',near,true);
-}
-function runLoc(l){runTxt(l.name.toLowerCase())}
-function rGrid(id,locs,sd){
-  const el=document.getElementById(id);
-  if(!locs.length){el.innerHTML='';return}
-  const tc=l=>l.type==='beach'?'tb':l.type==='walk'?'tg':'tr';
-  const tl=l=>l.type==='beach'?'Beach':l.type==='walk'?'Walk':'Town';
-  el.innerHTML=locs.map(l=>{
-    const hl=(l.highlights||[]).slice(0,3).map(h=>`<span class="pill" style="cursor:default;font-size:.68rem">${h}</span>`).join('');
-    const ds=sd&&l.dist!=null?`<span>📍 ${dl(l.dist)}</span>`:'';
-    const desc=l.desc.length>115?l.desc.slice(0,115)+'…':l.desc;
-    return`<article class="card" onclick="showArt('${l.article}')" tabindex="0"><div class="cimg"><img src="${l.img}" alt="${l.name}, ${l.county}" loading="lazy"><span class="ctag ${tc(l)}">${tl(l)}</span></div><div class="cbody"><h3>${l.name}, ${l.county}</h3><p>${desc}</p><div class="pillcloud" style="margin-bottom:.65rem">${hl}</div><div class="cmeta">${ds}<span>◎ ${l.county}</span></div></div></article>`;
+
+function renderSearchResults(data, dest, pax) {
+  if (!data || !data.trip_cards?.length) {
+    document.getElementById('search-results').innerHTML = '<div class="empty"><div class="e-icon">😕</div>No results found. Try a different destination or dates.</div>';
+    return;
+  }
+  const fb = FALLBACK[dest] || {};
+  const origin = document.getElementById('s-origin').value.split(' ')[0];
+  document.getElementById('search-results').innerHTML = data.trip_cards.slice(0,3).map((tc, i) => {
+    const fl = tc.flight || {};
+    const ht = tc.hotel || {};
+    return `<div class="trip-card${i===0?' selected':''} fade-in" style="animation-delay:${i*.08}s" onclick="openDetail('${dest}', ${JSON.stringify(data).replace(/"/g,'&quot;')})">
+      <div class="tc-head">
+        <div class="tc-route">
+          <div class="tc-flag">${fb.flag||'✈️'}</div>
+          <div>
+            <div class="tc-name syne">${origin} → ${dest.split(',')[0]}</div>
+            <div class="tc-sub">${fl.airline||''} · ${fl.stops===0?'Direct':(fl.stops||1)+' stop'} · ${tc.nights} nights · ${pax} pax</div>
+          </div>
+        </div>
+        <div class="tc-price-area">
+          <div class="tc-total">£${Math.round(tc.cost_summary?.grand_total||0)}</div>
+          <div class="tc-total-lbl">est. total</div>
+        </div>
+      </div>
+      <div class="tc-breakdown">
+        <div class="tc-item"><div class="tc-item-val">£${Math.round(fl.total_price_gbp||fl.price_gbp*pax||0)}</div><div class="tc-item-key">Flight</div></div>
+        <div class="tc-item"><div class="tc-item-val">£${ht.price_per_night_gbp||ht.ppn||0}/night</div><div class="tc-item-key">Hotel</div></div>
+        <div class="tc-item"><div class="tc-item-val">£${Math.round(tc.daily_budget?.total||0)}/day</div><div class="tc-item-key">Local spend</div></div>
+        <div class="tc-item"><div class="tc-item-val"><span class="badge ${visaBadgeClass(data.visa?.visa_type)}" style="font-size:10px">${(data.visa?.visa_label||'Check visa').split('(')[0].trim().substring(0,14)}</span></div><div class="tc-item-key">Visa</div></div>
+      </div>
+    </div>`;
   }).join('');
 }
 
-/* ── NAV ── */
-let curPage='home';
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  window.scrollTo({top:0,behavior:'instant'});
-  curPage=id;
-  const bk=document.getElementById('bkbtn'),mn=document.getElementById('mnav'),pb=document.getElementById('pgbar');
-  const isArt=['beaches','chippy','saxonshore','dogbeaches','deal'].includes(id);
-  if(id==='home'){bk.classList.remove('vis');mn.style.display='flex';pb.style.display='none';pb.style.width='0%';}
-  else{bk.classList.add('vis');mn.style.display='none';pb.style.display=isArt?'block':'none';if(isArt)pb.style.width='0%';}
-  const titles={home:'The Shoreline — England\'s Coastal Travel Guide',beaches:'The 7 Best Beaches on the Kent Coast — The Shoreline',chippy:'Best Fish & Chip Shops on the Kent Coast — The Shoreline',saxonshore:'Whitstable to Herne Bay Coastal Walk — The Shoreline',dogbeaches:'Best Dog-Friendly Beaches on the Kent Coast — The Shoreline',deal:'Deal: the Best Town on the Kent Coast — The Shoreline',search:'Search Results — The Shoreline'};
-  document.title=titles[id]||titles.home;
+function visaBadgeClass(t) {
+  if (!t) return 'badge-b';
+  if (t.includes('visa_free') || t === 'exemption') return 'badge-g';
+  if (t === 'on_arrival' || t === 'evisa') return 'badge-b';
+  if (t === 'esta') return 'badge-a';
+  if (t === 'required') return 'badge-r';
+  return 'badge-b';
 }
-function goHome(){
-  document.querySelectorAll('.nav-links li a').forEach(a=>a.classList.remove('active'));
-  document.querySelectorAll('#cgrid .card').forEach(c=>c.style.display='');
-  document.querySelectorAll('.rp').forEach(p=>p.classList.remove('active'));
-  document.querySelector('.rp').classList.add('active');
-  showPage('home');
+
+function openDetail(dest, dataStr) {
+  let data;
+  try { data = typeof dataStr === 'string' ? JSON.parse(dataStr.replace(/&quot;/g,'"')) : dataStr; }
+  catch { data = buildFallbackSearchData(dest, 'London', '2025-08-01', '2025-08-05', 1, 'GB'); }
+  currentDest = dest;
+  currentSubTab = 'overview';
+  document.getElementById('search-form-view').style.display = 'none';
+  document.getElementById('search-detail').style.display = 'block';
+  renderDetail(dest, data);
 }
-function showArt(s){const m={beaches:'beaches',chippy:'chippy',saxonshore:'saxonshore',dogbeaches:'dogbeaches',deal:'deal'};if(m[s])showPage(m[s]);}
-function filterCat(cat){showPage('home');document.querySelectorAll('.nav-links li a').forEach(a=>a.classList.toggle('active',a.dataset.cat===cat));document.querySelectorAll('#cgrid .card').forEach(el=>{el.style.display=(!cat||el.dataset.cat===cat)?'':'none';});}
-function filterReg(el,r){document.querySelectorAll('.rp').forEach(p=>p.classList.remove('active'));el.classList.add('active');document.querySelectorAll('.nav-links li a').forEach(a=>a.classList.remove('active'));document.querySelectorAll('#cgrid .card').forEach(c=>{c.style.display=(r==='all'||c.dataset.region===r)?'':'none';});}
-function toggleMob(){const m=document.getElementById('mobnav'),h=document.getElementById('hbg'),open=m.classList.toggle('open');h.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':'';}
-window.addEventListener('scroll',()=>{if(!['beaches','chippy','saxonshore','dogbeaches','deal'].includes(curPage))return;const bar=document.getElementById('pgbar'),d=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=d>0?Math.min(100,(window.scrollY/d)*100)+'%':'0%';});
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('card'))e.target.click();if(e.key==='Enter'&&e.target.id==='bkbtn')goHome();});
-function subNL(){const i=document.getElementById('nlemail');if(!i)return;if(!i.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.value.trim())){i.style.borderColor='#C0614B';i.focus();return;}i.style.borderColor='';i.closest('.nlform').style.display='none';document.getElementById('nlsuc').style.display='block';}
+
+function renderDetail(dest, data) {
+  const fb = FALLBACK[dest] || {};
+  const pax = parseInt(document.getElementById('s-pax').value) || 1;
+  const tc = data.trip_cards?.[0] || {};
+  const col = data.cost_of_living || {};
+  const visa = data.visa || fb.visa || {};
+  const vax = data.vaccinations || fb.vax || [];
+  const local = data.country_info || fb.local || {};
+  const fl = tc.flight || data.all_flights?.[0] || fb.fl?.[0] || {};
+  const ht = tc.hotel || data.all_hotels?.[0] || fb.ht?.[0] || {};
+  const nights = tc.nights || data.nights || 4;
+  const daily = tc.daily_budget || {};
+  const grand = Math.round(tc.cost_summary?.grand_total || 0);
+  const maxDaily = Math.max(...Object.values(daily).filter(v => typeof v === 'number' && v > 0), 1);
+  const sty = appStyle;
+
+  const subtabHtml = ['overview','flights','hotels','local info'].map(t =>
+    `<button class="sub-tab${currentSubTab===t?' active':''}" onclick="switchSubTab('${t}','${dest}')">${t.charAt(0).toUpperCase()+t.slice(1)}</button>`
+  ).join('');
+
+  let bodyHtml = '';
+  if (currentSubTab === 'overview') {
+    const bars = [
+      {label:'Food & drink', val:daily.food||col[`food_${sty}`]||0, color:'#4ddb8a'},
+      {label:'Transport', val:daily.transport||col[`transport_${sty}`]||0, color:'#4a9eff'},
+      {label:'Activities', val:daily.activities||col[`activities_${sty}`]||0, color:'#ff8c42'},
+      {label:'Miscellaneous', val:daily.misc||col[`misc_${sty}`]||0, color:'#c8f53c'},
+    ];
+    const maxB = Math.max(...bars.map(b=>b.val), 1);
+    bodyHtml = `<div class="detail-grid">
+      <div class="d-card">
+        <div class="d-card-title">💰 Daily budget (${sty} style)</div>
+        ${bars.map(b=>`<div class="bbar-row"><div class="bbar-labels"><span>${b.label}</span><span>£${Math.round(b.val)}/day</span></div><div class="bbar-track"><div class="bbar-fill" style="width:${Math.round(b.val/maxB*100)}%;background:${b.color}"></div></div></div>`).join('')}
+        <div class="info-row" style="margin-top:8px"><span class="ik">Total daily</span><span class="iv" style="color:var(--accent)">£${Math.round(daily.total||0)}/day · £${Math.round((daily.total||0)*nights)} for ${nights} nights</span></div>
+      </div>
+      <div class="d-card">
+        <div class="d-card-title">🛂 Visa requirements</div>
+        <div class="info-row"><span class="ik">Type</span><span class="iv"><span class="badge ${visaBadgeClass(visa.visa_type)}">${visa.visa_label||'Check requirements'}</span></span></div>
+        <div class="info-row"><span class="ik">Duration</span><span class="iv">${visa.max_stay_days ? visa.max_stay_days+' days' : '—'}</span></div>
+        <div class="info-row"><span class="ik">Passport</span><span class="iv">${visa.passport_validity_months ? 'Valid '+visa.passport_validity_months+'+ months' : 'Check validity'}</span></div>
+        ${visa.fee_usd ? `<div class="info-row"><span class="ik">Fee</span><span class="iv">$${visa.fee_usd} USD</span></div>` : ''}
+        <div style="margin-top:10px;padding:10px;background:var(--bg4);border-radius:8px;font-size:12px;color:var(--text2);line-height:1.55">💡 ${visa.notes||'Check official government guidance before travel.'}</div>
+      </div>
+    </div>
+    <div class="detail-grid" style="margin-top:14px">
+      <div class="d-card">
+        <div class="d-card-title">💉 Vaccination recommendations</div>
+        <div class="vax-list">${vax.map(v=>`<div class="vax-row"><span style="font-size:13px;color:var(--text2)">${v.vaccine_name}</span><span class="badge ${v.requirement_level==='recommended'?'badge-g':v.requirement_level==='required'?'badge-r':'badge-a'}">${v.requirement_level}</span></div>`).join('')||'<span style="font-size:13px;color:var(--text3)">No specific vaccines required</span>'}</div>
+        <div style="margin-top:10px;font-size:11px;color:var(--text3)">Source: CDC Travelers' Health · NHS Fit for Travel</div>
+      </div>
+      <div class="d-card">
+        <div class="d-card-title">🗺️ Trip cost summary</div>
+        <div class="info-row"><span class="ik">Cheapest flight</span><span class="iv">£${Math.round(fl.total_price_gbp||fl.price_gbp*pax||0)} (${fl.airline||'Various'})</span></div>
+        <div class="info-row"><span class="ik">Hotel (${nights} nights)</span><span class="iv">£${Math.round((ht.price_per_night_gbp||ht.ppn||0)*nights)} (£${ht.price_per_night_gbp||ht.ppn||0}/night)</span></div>
+        <div class="info-row"><span class="ik">Local spending</span><span class="iv">£${Math.round((daily.total||0)*nights)} (£${Math.round(daily.total||0)}/day)</span></div>
+        <div class="info-row" style="padding-top:10px;margin-top:4px;border-top:1px solid rgba(200,245,60,.2)"><span class="ik" style="font-weight:600;color:var(--text)">Estimated total</span><span class="iv" style="color:var(--accent);font-family:'Syne',sans-serif;font-size:18px">£${grand}</span></div>
+      </div>
+    </div>`;
+  } else if (currentSubTab === 'flights') {
+    const flights = data.all_flights || fb.fl || [];
+    bodyHtml = `<div class="d-card"><div class="d-card-title">✈️ Available flights</div><div class="fl-list">${flights.map(f=>`<div class="fl-item"><div><div class="fl-airline">${f.airline}</div><div class="fl-times">${f.display_depart||f.times||''} ${f.display_arrive?'→ '+f.display_arrive:''} · ${f.stops===0?'Direct':(f.stops||1)+' stop(s)'}</div></div><div style="text-align:right"><div class="fl-price">£${Math.round((f.total_price_gbp||f.price_gbp*pax||f.price||0))}</div><div style="font-size:11px;color:var(--text3)">${pax>1?pax+' tickets':'1 ticket'}</div></div></div>`).join('')}</div></div>`;
+  } else if (currentSubTab === 'hotels') {
+    const hotels = data.all_hotels || fb.ht || [];
+    bodyHtml = `<div class="d-card"><div class="d-card-title">🏨 Hotels in ${dest.split(',')[0]}</div><div class="ht-list">${hotels.map(h=>`<div class="ht-item"><div><div class="ht-name">${h.name}</div><div class="ht-area">${h.area||''} · <span class="ht-stars">${'★'.repeat(h.star_rating||h.stars||3)}</span> · ${h.review_score||h.score||0}★</div></div><div style="text-align:right"><div class="ht-price">£${h.price_per_night_gbp||h.ppn||0}</div><div class="ht-per">per night</div></div></div>`).join('')}</div></div>`;
+  } else if (currentSubTab === 'local info') {
+    const li = typeof local === 'object' ? local : {};
+    bodyHtml = `<div class="detail-grid">
+      <div class="d-card"><div class="d-card-title">🌍 Local information</div><div class="local-grid">${Object.entries(li).filter(([k])=>!['official_name','common_name','capital','region','subregion','population','area_km2','flag_emoji','languages'].includes(k)).map(([k,v])=>`<div><div class="li-k">${k.replace(/_/g,' ')}</div><div class="li-v">${k==='safety'||k==='safety_level'?`<span class="badge ${String(v).toLowerCase().includes('very safe')||String(v).toLowerCase().includes('extremely')?'badge-g':String(v).toLowerCase().includes('caution')?'badge-a':'badge-b'}">${v}</span>`:v}</div></div>`).join('')}</div></div>
+      <div class="d-card"><div class="d-card-title">💉 Vaccinations</div><div class="vax-list">${vax.map(v=>`<div class="vax-row"><span style="font-size:13px;color:var(--text2)">${v.vaccine_name}</span><span class="badge ${v.requirement_level==='recommended'?'badge-g':v.requirement_level==='required'?'badge-r':'badge-a'}">${v.requirement_level}</span></div>`).join('')||'<span style="color:var(--text3);font-size:13px">No specific requirements</span>'}</div></div>
+    </div>`;
+  }
+
+  document.getElementById('search-detail').innerHTML = `
+    <button class="back-link" onclick="document.getElementById('search-form-view').style.display='';document.getElementById('search-detail').style.display='none'">← Back to results</button>
+    <div class="detail-hero">
+      <div><h2>${fb.flag||'🌍'} ${dest.split(',')[0]}<span style="font-size:16px;font-weight:400;color:var(--text2);margin-left:8px">${dest.split(',')[1]||''}</span></h2><p>${fb.desc||''}</p></div>
+      <div style="text-align:right"><div class="detail-total">£${grand}</div><div class="detail-total-lbl">est. ${nights}-day total</div></div>
+    </div>
+    <div class="sub-tabs">${subtabHtml}</div>
+    ${bodyHtml}`;
+
+  // Store data for sub-tab switches
+  window._detailData = data;
+}
+
+function switchSubTab(tab, dest) {
+  currentSubTab = tab;
+  renderDetail(dest, window._detailData);
+}
+
+/* ── BUDGET FINDER ── */
+async function doBudgetFind() {
+  const budget = parseFloat(document.getElementById('b-budget').value) || 500;
+  const nights = parseInt(document.getElementById('b-nights').value) || 4;
+  const pax = parseInt(document.getElementById('b-pax').value) || 1;
+
+  const loadEl = document.getElementById('budget-loading');
+  const resEl = document.getElementById('budget-results');
+  loadEl.style.display = 'flex';
+  resEl.innerHTML = '';
+
+  try {
+    let data;
+    if (apiOnline) {
+      const r = await fetch(`${API_BASE}/api/budget/find`, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({origin:'London (LHR)', budget_gbp:budget, nights, adults:pax, passport_country:'GB', travel_style:appStyle}),
+      });
+      if (!r.ok) throw new Error();
+      data = await r.json();
+    } else {
+      await new Promise(r => setTimeout(r, 1200));
+      data = buildFallbackBudget(budget, nights, pax);
+    }
+    loadEl.style.display = 'none';
+    renderBudgetResults(data, budget);
+  } catch {
+    loadEl.style.display = 'none';
+    renderBudgetResults(buildFallbackBudget(budget, nights, pax), budget);
+  }
+}
+
+function buildFallbackBudget(budget, nights, pax) {
+  const sty = appStyle;
+  const hIdx = {budget:0,normal:1,luxury:2}[sty]||0;
+  const destinations = Object.entries(FALLBACK).map(([dest, fb]) => {
+    const col = fb.col;
+    const daily = (col[`food_${sty}`]||0)+(col[`transport_${sty}`]||0)+(col[`activities_${sty}`]||0)+(col[`misc_${sty}`]||0);
+    const fl = fb.fl[0]?.price * pax || 100;
+    const hotel = fb.ht[Math.min(hIdx, fb.ht.length-1)];
+    const ht = hotel?.ppn * nights || 80;
+    const lt = daily * nights;
+    const total = Math.round(fl + ht + lt);
+    if (total > budget) return null;
+    return {destination:dest, destination_code:fb.code, country_code:fb.cc, cheapest_flight:{airline:fb.fl[0]?.airline,price_gbp:fb.fl[0]?.price,total_gbp:fl,stops:fb.fl[0]?.stops||0}, hotel:{name:hotel?.name,price_per_night:hotel?.ppn,total_gbp:ht,star_rating:hotel?.stars||3}, daily_spend:{food:col[`food_${sty}`]||0,transport:col[`transport_${sty}`]||0,activities:col[`activities_${sty}`]||0,misc:col[`misc_${sty}`]||0,total:daily}, cost_summary:{flights:fl,hotels:ht,local:lt,grand_total:total,budget_remaining:budget-total,budget_used_pct:Math.round(total/budget*100)}, visa_label:(fb.visa?.visa_label||'Check visa'), nights};
+  }).filter(Boolean).sort((a,b) => b.cost_summary.budget_remaining - a.cost_summary.budget_remaining);
+  return {destinations, total_found:destinations.length, budget_gbp:budget, nights};
+}
+
+function renderBudgetResults(data, budget) {
+  const area = document.getElementById('budget-results');
+  if (!data?.destinations?.length) {
+    area.innerHTML = `<div class="empty"><div class="e-icon">🤔</div>No destinations found within £${budget}. Try increasing your budget or reducing nights.</div>`;
+    return;
+  }
+  area.innerHTML = `<div style="font-size:13px;color:var(--text3);margin-bottom:14px">${data.destinations.length} destinations fit within your £${budget} budget</div>`
+    + data.destinations.map((d, i) => {
+      const pct = d.cost_summary.budget_used_pct;
+      const rem = Math.round(d.cost_summary.budget_remaining);
+      const fb = FALLBACK[d.destination] || {};
+      return `<div class="brc${i===0?' best':''} fade-in" style="animation-delay:${i*.06}s" onclick="quickOpenDetail('${d.destination}')">
+        ${i===0?'<div class="best-badge">Best value</div>':''}
+        <div class="brc-head">
+          <div class="brc-flag">${fb.flag||'🌍'}</div>
+          <div><div class="brc-name syne">${d.destination.split(',')[0]}</div><div class="brc-desc">${fb.desc||d.destination.split(',')[1]||''}</div></div>
+          <div style="text-align:right;margin-left:auto;padding-left:12px"><div class="brc-total">£${d.cost_summary.grand_total}</div><div class="brc-meta">${rem>0?'£'+rem+' left over':'At limit'}</div></div>
+        </div>
+        <div class="bprog">
+          <div class="bprog-bar"><div class="bprog-fill" style="width:${pct}%;background:${pct>85?'#ff8c42':pct>70?'#c8f53c':'#4ddb8a'}"></div></div>
+          <div class="bprog-lbls"><span>Flight £${Math.round(d.cost_summary.flights)} · Hotel £${Math.round(d.hotel?.price_per_night||0)}/night · £${Math.round(d.daily_spend?.total||0)}/day</span><span>${pct}% of budget</span></div>
+        </div>
+      </div>`;
+    }).join('');
+}
+
+function quickOpenDetail(dest) {
+  switchAppTab('search');
+  document.getElementById('s-dest').value = dest;
+  document.getElementById('search-form-view').style.display = 'none';
+  const data = buildFallbackSearchData(dest, 'London', '2025-08-01', '2025-08-05', 1, 'GB');
+  currentDest = dest;
+  currentSubTab = 'overview';
+  document.getElementById('search-detail').style.display = 'block';
+  renderDetail(dest, data);
+}
+
+/* ── VISA CHECKER ── */
+async function doVisaCheck() {
+  const passport = document.getElementById('v-passport').value;
+  const dest = document.getElementById('v-dest').value;
+  const loadEl = document.getElementById('visa-loading');
+  const resEl = document.getElementById('visa-result');
+  loadEl.style.display = 'flex';
+  resEl.innerHTML = '';
+
+  try {
+    let data;
+    if (apiOnline) {
+      const r = await fetch(`${API_BASE}/api/visa/${passport}/${dest}`);
+      if (!r.ok) throw new Error();
+      data = await r.json();
+    } else {
+      await new Promise(r => setTimeout(r, 800));
+      // Build from fallback
+      const destName = Object.keys(FALLBACK).find(k => FALLBACK[k].cc === dest);
+      const fb = destName ? FALLBACK[destName] : null;
+      data = {passport, destination:dest, visa: fb?.visa || {visa_type:'unknown',visa_label:'Check requirements',notes:'Start the backend to enable live visa checking.'}, vaccinations: fb?.vax || []};
+    }
+    loadEl.style.display = 'none';
+    renderVisaResult(data);
+  } catch {
+    loadEl.style.display = 'none';
+    document.getElementById('visa-result').innerHTML = '<div class="empty"><div class="e-icon">⚠️</div>Could not fetch visa data. Please try again.</div>';
+  }
+}
+
+function renderVisaResult(data) {
+  const v = data.visa || {};
+  const vax = data.vaccinations || [];
+  const destFb = Object.values(FALLBACK).find(f => f.cc === data.destination) || {};
+  const bc = visaBadgeClass(v.visa_type);
+  const statusIcons = {visa_free:'✅',exemption:'✅',on_arrival:'🪪',esta:'📋',evisa:'💻',required:'❌',unknown:'❓'};
+  document.getElementById('visa-result').innerHTML = `
+    <div class="visa-result fade-in">
+      <div class="visa-result-hdr">
+        <div class="visa-flag">${destFb.flag||'🌍'}</div>
+        <div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:2px">${data.passport} passport → ${data.destination}</div>
+          <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800">${destFb.local?.currency?Object.keys(FALLBACK).find(k=>FALLBACK[k].cc===data.destination)||data.destination:data.destination}</div>
+          <div style="margin-top:6px"><span class="badge ${bc}" style="font-size:12px">${statusIcons[v.visa_type]||'❓'} ${v.visa_label||'Check requirements'}</span></div>
+        </div>
+      </div>
+      <div class="visa-body">
+        <div style="background:var(--bg4);border-radius:9px;padding:12px 14px;font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.55">${v.notes||'Always check the latest requirements before booking travel.'}</div>
+        <div class="visa-info-grid">
+          <div class="vii"><div class="vii-k">Duration</div><div class="vii-v">${v.max_stay_days?v.max_stay_days+' days':'Check requirements'}</div></div>
+          <div class="vii"><div class="vii-k">Passport validity</div><div class="vii-v">${v.passport_validity_months?'Valid '+v.passport_validity_months+'+ months':'Check validity'}</div></div>
+          <div class="vii"><div class="vii-k">Visa type</div><div class="vii-v">${v.visa_label||'Unknown'}</div></div>
+          <div class="vii"><div class="vii-k">Fee</div><div class="vii-v">${v.fee_usd?'$'+v.fee_usd+' USD':'Free'}</div></div>
+        </div>
+        ${vax.length ? `<div style="margin-top:16px"><div class="d-card-title" style="font-size:11px;margin-bottom:10px">💉 Vaccination info</div><div class="vax-list">${vax.map(v=>`<div class="vax-row"><span style="font-size:13px;color:var(--text2)">${v.vaccine_name}</span><span class="badge ${v.requirement_level==='recommended'?'badge-g':v.requirement_level==='required'?'badge-r':'badge-a'}">${v.requirement_level}</span></div>`).join('')}</div></div>` : ''}
+      </div>
+    </div>`;
+}
+
+/* ── DESTINATIONS SCROLL ── */
+function renderDestScroll() {
+  const trending = [
+    {dest:"Krakow, Poland",tags:["Very safe","Visa-free","Budget pick"]},
+    {dest:"Budapest, Hungary",tags:["Thermal baths","Visa-free","Nightlife"]},
+    {dest:"Prague, Czechia",tags:["UNESCO town","Visa-free","Great beer"]},
+    {dest:"Lisbon, Portugal",tags:["Sunny","Visa-free","Trams"]},
+    {dest:"Bangkok, Thailand",tags:["Street food","Temples","Cheap"]},
+    {dest:"Tokyo, Japan",tags:["Unique","Visa-free","Very safe"]},
+    {dest:"Bali, Indonesia",tags:["Beaches","Surf","Temples"]},
+    {dest:"New York, USA",tags:["Iconic","ESTA","World food"]},
+  ];
+  document.getElementById('dest-scroll').innerHTML = trending.map(({dest,tags}) => {
+    const fb = FALLBACK[dest];
+    if (!fb) return '';
+    const sty = 'budget';
+    const col = fb.col;
+    const daily = (col.food_budget||0)+(col.transport_budget||0)+(col.activities_budget||0)+(col.misc_budget||0);
+    return `<div class="dest-card" onclick="document.getElementById('s-dest').value='${dest}';document.getElementById('app').scrollIntoView({behavior:'smooth'})">
+      <div class="dest-flag">${fb.flag}</div>
+      <div class="dest-city syne">${dest.split(',')[0]}</div>
+      <div class="dest-country">${dest.split(',')[1]?.trim()||''}</div>
+      <div class="dest-price">£${Math.round(daily)}<span style="font-size:14px;font-weight:400">/day</span></div>
+      <div class="dest-price-label">flight from £${fb.fl[0]?.price} · budget style</div>
+      <div class="dest-tags">${tags.map(t=>`<span class="dest-tag">${t}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ── INIT ── */
+renderDestScroll();
+checkAPI();
+setInterval(checkAPI, 30000);
 </script>
 </body>
 </html>
